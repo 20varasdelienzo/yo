@@ -7,10 +7,607 @@
   <meta name="theme-color" content="#ffffff">
   <title>Joaquín Molina — Anthropology of the Americas</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="estilos.css">
-  <script src="sitio.js" defer></script>
+  <style>
+:root {
+  color-scheme: light;
+  --paper: #fff;
+  --ink: #24211e;
+  --muted: #655e57;
+  --line: #e3dfd9;
+  --accent: #8e3d2e;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, sans-serif;
+  --margin: clamp(1.25rem, 6vw, 6rem);
+  --page: 83rem;
+  --text: 37rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #f3e4dc; color: var(--ink); }
+a { color: inherit; text-underline-offset: .22em; }
+a:hover { color: var(--accent); }
+a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: .25em;
+}
+p, h1, h2, h3, figure { margin: 0; }
+img { max-inline-size: 100%; height: auto; }
+[id] { scroll-margin-block-start: 1.5rem; }
+.visually-hidden {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  inset: 1rem auto auto 1rem;
+  z-index: 5;
+  padding: .65rem .9rem;
+  background: var(--paper);
+}
+.skip-link:not(:focus) { clip-path: inset(50%); }
+.reading-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 4;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(var(--page-progress, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+.container-fluid.site-width {
+  width: min(100%, var(--page));
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .45rem 1.6rem;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid var(--line);
+}
+.signature {
+  font: 400 1.33rem/1.1 var(--serif);
+  letter-spacing: -.045em;
+  text-decoration: none;
+}
+.navigation, .language-nav, .note-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35rem 1.35rem;
+}
+.masthead nav a, .site-footer a, .note-links a, .read-on {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  min-height: 2.75rem;
+  font-size: .82rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+.masthead nav a:hover, .site-footer a:hover, .note-links a:hover, .read-on:hover { color: var(--accent); }
+.masthead .language-nav { gap: .25rem .9rem; }
+.language-nav a[aria-current="page"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+.eyebrow, .entry-meta {
+  color: var(--muted);
+  font: 500 .72rem/1.55 var(--sans);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.cover {
+  display: grid;
+  align-content: center;
+  min-height: min(53rem, 89svh);
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+.cover .eyebrow { margin-block-end: clamp(1rem, 2vw, 2rem); }
+.cover-title {
+  font: 400 clamp(3.15rem, 11.2vw, 10.2rem)/.92 var(--serif);
+  letter-spacing: -.07em;
+}
+.cover-title > span { display: block; }
+.cover-title .last-line {
+  margin-inline-start: clamp(.25rem, 4vw, 3.6rem);
+  color: var(--accent);
+  font-style: italic;
+}
+.cover-lead {
+  max-width: 30ch;
+  margin-top: clamp(1.8rem, 4vw, 3.4rem);
+  font: 400 clamp(1.27rem, 2.2vw, 1.83rem)/1.43 var(--serif);
+}
+.read-on { margin-top: 1.1rem; }
+.read-on .direction { font-size: 1.25em; }
+.essay-section {
+  border-top: 1px solid var(--line);
+  padding-block: clamp(3.5rem, 8vw, 7.5rem);
+}
+.row.essay-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  --bs-gutter-x: 0;
+}
+.essay-row > * { min-width: 0; padding: 0; }
+.essay-heading { margin-bottom: 1.45rem; }
+.essay-heading .eyebrow { margin-bottom: .65rem; }
+.chapter-title {
+  font: 400 clamp(2.45rem, 5vw, 5.2rem)/1 var(--serif);
+  letter-spacing: -.058em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.chapter-title .accent { color: var(--accent); }
+.reading-column {
+  width: min(100%, var(--text));
+  margin-inline: auto;
+}
+.reading-column > .essay-lead {
+  font: 400 clamp(1.28rem, 2.15vw, 1.85rem)/1.42 var(--serif);
+  margin-bottom: 1.2em;
+}
+.prose {
+  font: 400 clamp(1.09rem, 1.55vw, 1.31rem)/1.67 var(--serif);
+  overflow-wrap: break-word;
+}
+.prose + .prose { margin-top: 1em; }
+.research-entry + .research-entry { margin-block-start: 2.75rem; }
+.research-entry h3, .archive-entry h3 {
+  font: 400 clamp(1.5rem, 2.65vw, 2.18rem)/1.17 var(--serif);
+  letter-spacing: -.035em;
+  overflow-wrap: anywhere;
+}
+.research-entry h3 + p, .archive-entry h3 + p { margin-top: .52rem; }
+.research-entry .entry-meta, .archive-entry .entry-meta { margin-bottom: .4rem; }
+.note-links { column-gap: 1rem; margin-top: .65rem; }
+.note-links a { display: inline; min-height: 0; text-decoration: underline; text-decoration-color: var(--line); }
+.note-links a:hover { text-decoration-color: currentColor; }
+.note-links a[download] { color: var(--accent); }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  margin-top: 1.75rem;
+}
+.gallery figure { min-width: 0; }
+.gallery figure:only-child { width: min(100%, 56rem); }
+.gallery-frame { overflow: hidden; background: #f5f3f0; }
+.gallery img { display: block; inline-size: 100%; }
+.gallery figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .15rem .8rem;
+  margin-top: .75rem;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.gallery figcaption strong { font-weight: 550; color: var(--ink); }
+
+.archive-list { margin: 0; padding: 0; list-style: none; }
+.archive-entry + .archive-entry { margin-top: 2rem; }
+.archive-entry .prose { font-size: clamp(1.03rem, 1.32vw, 1.18rem); }
+.extra-reading { border-top: 1px solid var(--line); margin-top: 2.5rem; }
+.extra-reading summary {
+  cursor: pointer;
+  color: var(--ink);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  padding-block: .9rem;
+  font: 400 1.22rem/1.25 var(--serif);
+}
+.extra-reading summary::-webkit-details-marker { display: none; }
+.disclosure-mark { color: var(--accent); font: 400 1.15rem/1 var(--sans); }
+.disclosure-mark::before { content: "+"; }
+.extra-reading[open] .disclosure-mark::before { content: "−"; }
+.extra-reading[open] { padding-bottom: 1rem; }
+.extra-reading .archive-list { padding-block: .55rem .5rem; }
+.essay-section#contacto { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+.site-footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+  padding-block: .7rem 1.4rem;
+  border-top: 1px solid var(--line);
+}
+.site-footer p { color: var(--muted); font-size: .82rem; }
+
+/* Keep the reading layout usable if the Bootstrap stylesheet cannot load. */
+@media (min-width: 768px) {
+  .essay-row > .col-md-4 { flex: 0 0 33.333333%; width: 33.333333%; padding-inline-end: 1.5rem; }
+  .essay-row > .col-md-8 { flex: 0 0 66.666667%; width: 66.666667%; }
+  .essay-row .reading-column { margin-inline-end: 0; }
+}
+@media (max-width: 767px) {
+  .essay-row > * { width: 100%; }
+  .essay-row .reading-column { margin-inline: 0; }
+  .navigation { order: 3; width: 100%; column-gap: 1rem; }
+  .cover { min-height: min(41rem, 78svh); }
+  .cover-title { font-size: clamp(2.7rem, 11vw, 5.5rem); }
+  .cover-title .last-line { margin-inline-start: 0; }
+}
+@media (max-width: 365px) {
+  .navigation { gap: 0 .75rem; }
+  .masthead nav a { font-size: .77rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .read-on .direction { transition: transform .23s ease; }
+  .read-on:hover .direction { transform: translateY(.18em); }
+  .letter-word { display: inline-block; max-width: 100%; }
+  .letter { display: inline-block; }
+  .assembled .letter {
+    --inked: clamp(0, calc((var(--reveal, 1) - var(--delay)) * 2.1), 1);
+    opacity: calc(.42 + .58 * var(--inked));
+    transform: translate3d(
+      calc(var(--drift) * (1 - var(--inked))),
+      calc(.14em * (1 - var(--inked))),
+      0
+    );
+  }
+  .gallery img { transition: transform .7s cubic-bezier(.2, .7, .25, 1); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .gallery figure:hover img { transform: scale(1.012); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress { display: none; }
+}
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 5rem);
+}
+.map-intro .prose { margin-top: .85rem; }
+
+@media (max-width: 767px) {
+  .map-layout { grid-template-columns: 1fr; }
+}
+
+/* The atlas runs behind the reading surface. */
+body { isolation: isolate; }
+.atlas-stage {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #faf9f6;
+}
+.atlas-vector { display: block; width: 100%; height: 100%; }
+.atlas-stage::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.83) 22%, rgba(255,255,255,.40) 55%, transparent 82%),
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent 24%, transparent 76%, rgba(255,255,255,.25));
+}
+.atlas-grid {
+  fill: none;
+  stroke: #b6b1a5;
+  stroke-width: .65;
+  stroke-opacity: .42;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-land {
+  fill: #e6dfd3;
+  fill-opacity: calc(.23 + .29 * var(--land-ink, 0));
+  stroke: #7d7468;
+  stroke-opacity: .37;
+  stroke-width: .95;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-trace {
+  fill: none;
+  stroke: #786858;
+  stroke-opacity: .57;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--land-ink, 0));
+}
+.atlas-route {
+  fill: none;
+  stroke: #9a4d3d;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--route-offset, .88);
+  opacity: .78;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-route.is-branch { stroke-width: 1.15; opacity: .57; }
+.atlas-place { opacity: var(--place-opacity, .76); }
+.atlas-dot, .atlas-ring {
+  fill: #fffdf8;
+  stroke: #965447;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-ring { fill: none; stroke-opacity: .38; }
+.atlas-place.is-current .atlas-dot { fill: #965447; }
+.atlas-label {
+  fill: #554c43;
+  stroke: #faf8f2;
+  stroke-width: 3px;
+  paint-order: stroke;
+  stroke-linejoin: round;
+  font: 500 11px var(--sans);
+}
+.atlas-ocean {
+  fill: #766d60;
+  fill-opacity: .6;
+  letter-spacing: 5px;
+  font: italic 14px var(--serif);
+  text-anchor: middle;
+}
+  padding: .3em .46em;
+  background: rgba(255,255,255,.82);
+}
+.cover { min-height: min(57rem, 92svh); }
+.cover-title {
+  font-size: clamp(3.15rem, 11.4vw, 10.55rem);
+  line-height: .92;
+}
+.essay-section { border-top-color: rgba(118,105,92,.23); }
+.reading-column, .map-intro {
+  position: relative;
+  isolation: isolate;
+}
+.reading-column::before, .map-intro::before {
+  position: absolute;
+  z-index: -1;
+  inset: -.75rem -1rem;
+  content: "";
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 0 1.25rem 1.1rem rgba(255,255,255,.72);
+  pointer-events: none;
+}
+.essay-heading, .cover-title, .cover-lead { text-shadow: 0 0 .35em rgba(255,255,255,.75); }
+.route-index {
+  align-self: end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(118,105,92,.28);
+}
+#folger { scroll-margin-block-start: min(42vh, 22rem); }
+.route-index li { border-bottom: 1px solid rgba(118,105,92,.25); }
+.route-index a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding-block: .48rem;
+  text-decoration: none;
+  font: 400 clamp(1.04rem, 2vw, 1.35rem)/1.3 var(--serif);
+}
+.route-index a > span[aria-hidden] { color: var(--accent); font: .85rem var(--sans); }
+.route-index a:hover > span[aria-hidden] { translate: .15em 0; }
+.route-index a > span[aria-hidden] { transition: translate .25s ease; }
+@media (min-width: 768px) {
+  .map-layout { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: end; }
+}
+@media (max-width: 767px) {
+  .atlas-stage::after {
+    background: linear-gradient(90deg, rgba(255,255,255,.94), rgba(255,255,255,.58) 60%, rgba(255,255,255,.19));
+  }
+  .cover { min-height: min(40rem, 79svh); }
+  .cover-title { font-size: clamp(2.7rem, 11vw, 5.5rem); }
+  .reading-column::before, .map-intro::before {
+    inset: -.5rem;
+    background: rgba(255,255,255,.83);
+    box-shadow: 0 0 .9rem .65rem rgba(255,255,255,.75);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-index a > span[aria-hidden] { transition: none; }
+}
+
+/* Openings keep the type in the center of the moving atlas. */
+.atlas-stage { background: #fcfbf8; }
+.atlas-stage::after {
+  background: radial-gradient(ellipse at 50% 46%, rgba(255,255,255,.72), rgba(255,255,255,.28) 43%, rgba(255,255,255,.04) 76%);
+}
+.atlas-grid { stroke: #a69c8c; stroke-opacity: .29; }
+.atlas-frame { fill: none; stroke: #a69c8c; stroke-opacity: .38; stroke-width: .75; vector-effect: non-scaling-stroke; }
+.atlas-land {
+  fill: #dbd1c1;
+  fill-opacity: calc(.27 + .35 * var(--land-ink, 0));
+  stroke: #736653;
+  stroke-opacity: .43;
+}
+.atlas-trace { fill: none; stroke-opacity: .66; }
+.atlas-route { stroke: #985241; stroke-width: 1.5; }
+.atlas-ocean { fill-opacity: .49; letter-spacing: 3px; }
+.masthead { padding-block: .8rem; border-bottom-color: rgba(118,105,92,.2); }
+.masthead .navigation { column-gap: 1.1rem; }
+.cover {
+  min-height: min(56rem, calc(100svh - 4.5rem));
+  justify-items: center;
+  text-align: center;
+  padding-block: clamp(3.8rem, 8vw, 7rem);
+}
+.cover-title {
+  width: min(100%, 74rem);
+  font-size: clamp(3.4rem, 12vw, 10.65rem);
+  letter-spacing: -.071em;
+  line-height: .88;
+}
+.cover-title .last-line { margin: .035em 0 0; }
+.cover-lead { max-width: 33ch; }
+.cover .eyebrow { margin-bottom: 1.35rem; }
+.read-on { margin-top: .9rem; }
+.essay-section {
+  padding-block: 0 clamp(3.5rem, 7.5vw, 7rem);
+  border-top: 0;
+}
+.chapter-opening {
+  --opening-window: min(66svh, 36rem);
+  min-height: min(97svh, 49rem);
+  display: grid;
+  align-items: start;
+  text-align: center;
+}
+.opening-center {
+  position: sticky;
+  top: max(1rem, calc((100svh - var(--opening-window)) / 2));
+  display: grid;
+  place-items: center;
+  min-height: var(--opening-window);
+  padding-block: 2rem;
+}
+.chapter-opening.is-compact {
+  --opening-window: min(43svh, 22rem);
+  min-height: var(--opening-window);
+}
+.chapter-opening.is-compact .opening-center { position: relative; top: auto; }
+.chapter-title {
+  max-width: min(100%, 13ch);
+  margin-inline: auto;
+  font: 400 clamp(3rem, 9.2vw, 8.25rem)/.92 var(--serif);
+  letter-spacing: -.062em;
+  text-shadow: 0 0 .28em rgba(255,255,255,.7);
+  text-wrap: balance;
+}
+.is-compact .chapter-title { font-size: clamp(2.85rem, 7vw, 6.3rem); }
+.essay-section .reading-column { margin-inline: auto; }
+.reading-column::before, .map-intro::before {
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 0 1.35rem 1.12rem rgba(255,255,255,.77);
+}
+.map-layout { display: block; width: min(100%, var(--text)); margin-inline: auto; }
+.map-intro .prose { margin: 0 0 1.6rem; }
+.route-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .25rem 1.2rem;
+  border: 0;
+}
+.route-index li { border: 0; }
+.route-index a {
+  gap: .35em;
+  font: 400 .83rem/1.4 var(--sans);
+  text-decoration: underline;
+  text-underline-offset: .23em;
+  text-decoration-color: rgba(118,105,92,.42);
+}
+.route-index a > span[aria-hidden] { font-size: .77em; }
+.gallery { margin-top: 0; }
+.gallery figure:only-child { margin-inline: auto; }
+#contacto { padding-top: 0; }
+#contacto .chapter-opening { --opening-window: min(33svh, 15rem); }
+@media (max-width: 767px) {
+  .atlas-stage::after {
+    background: radial-gradient(ellipse at 50% 48%, rgba(255,255,255,.72), rgba(255,255,255,.22) 62%, transparent);
+  }
+  .cover { min-height: min(36rem, 78svh); }
+  .cover-title { font-size: clamp(2.9rem, 11.5vw, 5.5rem); }
+  .chapter-opening { --opening-window: min(60svh, 23rem); min-height: min(83svh, 33rem); }
+  .chapter-title { font-size: clamp(2.75rem, 10.2vw, 5.25rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-opening, .chapter-opening.is-compact { min-height: auto; }
+  .chapter-opening .opening-center { position: relative; top: auto; min-height: auto; padding-block: 3.5rem 2.5rem; }
+}
+/* Keep the atlas legible around the centered type. */
+.atlas-stage { background: #f8f6ef; }
+.atlas-stage::after {
+  background: radial-gradient(ellipse at 50% 48%, rgba(255,255,255,.62), rgba(255,255,255,.16) 48%, transparent 72%);
+}
+.atlas-grid { stroke-opacity: .36; }
+.atlas-land { fill-rule: evenodd; fill-opacity: calc(.36 + .28 * var(--land-ink, 0)); stroke-opacity: .54; }
+.atlas-trace { fill: none; }
+.atlas-frame { stroke-opacity: .48; }
+.cover-title { font-size: clamp(3.9rem, 14vw, 12.2rem); }
+.cover-title .last-line { color: #8e3d2e; }
+.cover .eyebrow { margin-bottom: 1.6rem; }
+@media (max-width: 767px) {
+  .cover-title { font-size: clamp(3.1rem, 12.3vw, 6.2rem); }
+}
+
+  </style>
 </head>
-<body id="inicio">
+<body id="inicio" data-edition="mapamundi">
+  <div class="atlas-stage" aria-hidden="true">
+  <svg class="atlas-vector" viewBox="-669.6 -370 3170 1620" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <rect class="atlas-frame" x="-578.6" y="-224" width="2988" height="1328"/>
+    <path class="atlas-grid" d="M-578.6 -265.5 L-578.6 1145.5 M-495.6 -265.5 L-495.6 1145.5 M-412.6 -265.5 L-412.6 1145.5 M-329.6 -265.5 L-329.6 1145.5 M-246.6 -265.5 L-246.6 1145.5 M-163.6 -265.5 L-163.6 1145.5 M-80.6 -265.5 L-80.6 1145.5 M2.4 -265.5 L2.4 1145.5 M85.4 -265.5 L85.4 1145.5 M168.4 -265.5 L168.4 1145.5 M251.4 -265.5 L251.4 1145.5 M334.4 -265.5 L334.4 1145.5 M417.4 -265.5 L417.4 1145.5 M500.4 -265.5 L500.4 1145.5 M583.4 -265.5 L583.4 1145.5 M666.4 -265.5 L666.4 1145.5 M749.4 -265.5 L749.4 1145.5 M832.4 -265.5 L832.4 1145.5 M915.4 -265.5 L915.4 1145.5 M998.4 -265.5 L998.4 1145.5 M1081.4 -265.5 L1081.4 1145.5 M1164.4 -265.5 L1164.4 1145.5 M1247.4 -265.5 L1247.4 1145.5 M1330.4 -265.5 L1330.4 1145.5 M1413.4 -265.5 L1413.4 1145.5 M1496.4 -265.5 L1496.4 1145.5 M1579.4 -265.5 L1579.4 1145.5 M1662.4 -265.5 L1662.4 1145.5 M1745.4 -265.5 L1745.4 1145.5 M1828.4 -265.5 L1828.4 1145.5 M1911.4 -265.5 L1911.4 1145.5 M1994.4 -265.5 L1994.4 1145.5 M2077.4 -265.5 L2077.4 1145.5 M2160.4 -265.5 L2160.4 1145.5 M2243.4 -265.5 L2243.4 1145.5 M2326.4 -265.5 L2326.4 1145.5 M2409.4 -265.5 L2409.4 1145.5 M-578.6 1104.0 L2409.4 1104.0 M-578.6 1021.0 L2409.4 1021.0 M-578.6 938.0 L2409.4 938.0 M-578.6 855.0 L2409.4 855.0 M-578.6 772.0 L2409.4 772.0 M-578.6 689.0 L2409.4 689.0 M-578.6 606.0 L2409.4 606.0 M-578.6 523.0 L2409.4 523.0 M-578.6 440.0 L2409.4 440.0 M-578.6 357.0 L2409.4 357.0 M-578.6 274.0 L2409.4 274.0 M-578.6 191.0 L2409.4 191.0 M-578.6 108.0 L2409.4 108.0 M-578.6 25.0 L2409.4 25.0 M-578.6 -58.0 L2409.4 -58.0 M-578.6 -141.0 L2409.4 -141.0 M-578.6 -224.0 L2409.4 -224.0"/>
+    <path class="atlas-land"/>
+    <path class="atlas-land atlas-trace" pathLength="1"/>
+    <g class="atlas-lines">
+      <path class="atlas-route" d="M321.0 714.3 C301.2 689.0 268.0 581.1 291.2 539.8" pathLength="1" data-from="0.02" data-to="0.35" style="--route-offset:0.727"/>
+<path class="atlas-route" d="M291.2 539.8 C201.6 390.2 185.0 215.9 276.0 117.0" pathLength="1" data-from="0.35" data-to="0.66" style="--route-offset:1.000"/>
+<path class="atlas-route" d="M276.0 117.0 C492.1 -41.4 749.4 -66.3 974.3 18.9" pathLength="1" data-from="0.64" data-to="0.89" style="--route-offset:1.000"/>
+<path class="atlas-route is-branch" d="M291.2 539.8 C317.8 531.3 367.6 539.6 366.3 584.3" pathLength="1" data-from="0.83" data-to="0.98" style="--route-offset:1.000"/>
+<path class="atlas-route is-branch" d="M366.3 584.3 C624.9 489.8 790.9 141.2 974.3 18.9" pathLength="1" data-from="0.88" data-to="1" style="--route-offset:1.000"/>
+    </g>
+    <text class="atlas-ocean" x="639" y="325" data-atlas-ocean="true">Atlantic Ocean</text>
+    <g class="atlas-place" data-place="valparaiso" transform="translate(321.0 714.3)">
+      <g class="atlas-marker">
+        <circle class="atlas-ring" r="6.4"/>
+        <circle class="atlas-dot" r="2.5"/>
+        <text class="atlas-label" x="8" y="16" text-anchor="start">Valparaíso</text>
+      </g>
+    </g>
+    <g class="atlas-place" data-place="cochas" transform="translate(291.2 539.8)">
+      <g class="atlas-marker">
+        <circle class="atlas-ring" r="6.4"/>
+        <circle class="atlas-dot" r="2.5"/>
+        <text class="atlas-label" x="-8" y="-8" text-anchor="end">Cochas Chico</text>
+      </g>
+    </g>
+    <g class="atlas-place" data-place="cochabamba" transform="translate(366.3 584.3)">
+      <g class="atlas-marker">
+        <circle class="atlas-ring" r="6.4"/>
+        <circle class="atlas-dot" r="2.5"/>
+        <text class="atlas-label" x="9" y="15" text-anchor="start">Cochabamba</text>
+      </g>
+    </g>
+    <g class="atlas-place" data-place="washington" transform="translate(276.0 117.0)">
+      <g class="atlas-marker">
+        <circle class="atlas-ring" r="6.4"/>
+        <circle class="atlas-dot" r="2.5"/>
+        <text class="atlas-label" x="-8" y="-9" text-anchor="end">Washington, D.C.</text>
+      </g>
+    </g>
+    <g class="atlas-place" data-place="bonn" transform="translate(974.3 18.9)">
+      <g class="atlas-marker">
+        <circle class="atlas-ring" r="6.4"/>
+        <circle class="atlas-dot" r="2.5"/>
+        <text class="atlas-label" x="8" y="-9" text-anchor="start">Bonn</text>
+      </g>
+    </g>
+  </svg>
+  </div>
   <a class="skip-link" href="#principal" data-i18n="skip">Skip to content</a>
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="container-fluid site-width">
@@ -30,53 +627,51 @@
     </div>
   </header>
   <main class="container-fluid site-width" id="principal">
-    <section class="cover" aria-labelledby="nombre">
+    <section class="cover" data-scene="cover" aria-labelledby="nombre">
       <p class="eyebrow" data-i18n="coverRoute">Transcontinental choreographies</p>
       <h1 class="cover-title" id="nombre"><span data-assemble data-i18n="coverLineOne">The lives</span> <span class="last-line" data-assemble data-i18n="coverLineTwo">of things</span></h1>
       <p class="cover-lead" data-i18n="heroDeck">I study how objects, rituals, and collections shape memory in the Americas.</p>
       <a href="#composicion" class="read-on"><span data-i18n="startReading">Follow the route</span><span class="direction" aria-hidden="true">↓</span></a>
     </section>
-    <section class="essay-section" id="composicion" aria-labelledby="ejes">
+    <section class="essay-section" id="composicion" data-scene="ocean" aria-labelledby="ejes">
+      <div class="chapter-opening">
+        <div class="opening-center"><h2 class="chapter-title" id="ejes" data-assemble data-i18n="mapTitle">Across the Atlantic</h2></div>
+      </div>
       <div class="map-layout">
         <div class="map-intro">
-          <h2 class="chapter-title" id="ejes" data-assemble data-i18n="mapTitle">Across the Atlantic</h2>
+          
           <p class="prose" data-i18n="mapCopy">From Valparaíso to Bonn, my work follows the paths objects take through the Americas and across the Atlantic. These are some of the places from which I look at their histories.</p>
         </div>
-        <figure>
-          <div class="route-map" aria-labelledby="map-caption">
-            <canvas aria-hidden="true"></canvas>
-            <ol class="map-stops">
-              <li class="map-stop" style="--x: 17%; --y: 82%"><a href="#formacion"><span>Valparaíso</span></a></li>
-              <li class="map-stop" style="--x: 15%; --y: 58%"><a href="#investigacion"><span>Cochas Chico</span></a></li>
-              <li class="map-stop" style="--x: 21%; --y: 29%"><a href="#folger"><span>Washington, D.C.</span></a></li>
-              <li class="map-stop" style="--x: 76%; --y: 18%"><a href="#museos"><span>Bonn</span></a></li>
-            </ol>
-          </div>
-          <figcaption class="entry-meta" id="map-caption" data-i18n="mapCaption">Places in my research and biography</figcaption>
-        </figure>
+        <ol class="route-index">
+          <li><a href="#formacion">Valparaíso<span aria-hidden="true">↗</span></a></li>
+          <li><a href="#investigacion">Cochas Chico<span aria-hidden="true">↗</span></a></li>
+          <li><a href="#folger">Washington, D.C.<span aria-hidden="true">↗</span></a></li>
+          <li><a href="#museos">Cochabamba<span aria-hidden="true">↗</span></a></li>
+          <li><a href="#publicaciones">Bonn<span aria-hidden="true">↗</span></a></li>
+        </ol>
       </div>
     </section>
-    <section class="essay-section" id="investigacion" aria-labelledby="investigacion-titulo">
-      <div class="row essay-row">
-        <div class="col-md-4 essay-heading">
-          <h2 class="chapter-title" id="investigacion-titulo" data-assemble data-i18n="storyTitle">What a gourd can tell</h2>
-        </div>
-        <div class="col-md-8">
-          <div class="reading-column">
+    <section class="essay-section" id="investigacion" data-scene="cochas" aria-labelledby="investigacion-titulo">
+      <div class="chapter-opening">
+        <div class="opening-center"><h2 class="chapter-title" id="investigacion-titulo" data-assemble data-i18n="storyTitle">What a gourd can tell</h2></div>
+      </div>
+<div class="reading-column">
             <p class="essay-lead" data-i18n="storyLead">Thirty-one scenes fit on the surface of a gourd. I follow the story carved into it and the path the object took from Peru to Germany.</p><article class="research-entry"><p class="entry-meta" data-i18n="andesLabel">Material culture · Provenance</p>
             <h3 data-assemble data-i18n="andesTitle">Between the Andes and the Alps</h3>
             <p class="prose" data-i18n="andesCopy">I trace the journey of a gourd carved by Guillermo Ventura. Johanna Schupp bought it in Cochas Chico in 1983, brought it to Borken in 1987, and donated it to the BASA Museum in 2021. Cataloged as <strong>Schu18</strong>, the gourd depicts a child’s illness, diagnosis, and recovery in 31 scenes set in the Mantaro Valley.</p>
-            <div class="note-links"><a class="entry-link" href="https://www.mkb.ch/en/veranstaltungen/unknown-creators-from-the-americas.html"><span data-i18n="baselLink">Talk program at the Museum der Kulturen Basel</span> <span aria-hidden="true">↗</span></a>
+            <div class="note-links" data-scene="washington"><a class="entry-link" href="https://www.mkb.ch/en/veranstaltungen/unknown-creators-from-the-americas.html"><span data-i18n="baselLink">Talk program at the Museum der Kulturen Basel</span> <span aria-hidden="true">↗</span></a>
             
-            <a class="entry-link" id="folger" href="https://www.folger.edu/whats-on/folger-salon-october-2026/"><span data-i18n="folgerLink">Presentation at the Folger Salon</span> <span aria-hidden="true">↗</span></a></div></article><article class="research-entry"><p class="entry-meta" data-i18n="mantaroLabel">Ethnography · Peru</p>
+            <a class="entry-link" id="folger" href="https://www.folger.edu/whats-on/folger-salon-october-2026/"><span data-i18n="folgerLink">Presentation at the Folger Salon</span> <span aria-hidden="true">↗</span></a></div></article>
+<article class="research-entry"><p class="entry-meta" data-i18n="mantaroLabel">Ethnography · Peru</p>
             <h3 data-assemble data-i18n="mantaroTitle">Mantaro Valley</h3>
             <p class="prose" data-i18n="mantaroCopy">My doctoral research examines Wanka identity through two practices in Peru’s Mantaro Valley: gourd carving in Cochas Chico and the pagapu offering ritual at Huaytapallana.</p></article>
           </div>
-        </div>
-      </div>
     </section>
-    <section class="essay-section" id="galeria" aria-labelledby="galeria-titulo">
-      <h2 class="chapter-title" id="galeria-titulo" data-assemble data-i18n="galleryTitle">Looking closely</h2>
+    <section class="essay-section" id="galeria" data-scene="crossing" aria-labelledby="galeria-titulo">
+      <div class="chapter-opening">
+        <div class="opening-center"><h2 class="chapter-title" id="galeria-titulo" data-assemble data-i18n="galleryTitle">Looking closely</h2></div>
+      </div>
+      
       <div class="gallery">
           <figure>
             <div class="gallery-frame">
@@ -86,13 +681,11 @@
           </figure>
       </div>
     </section>
-    <section class="essay-section" id="museos" aria-labelledby="museos-titulo">
-      <div class="row essay-row">
-        <div class="col-md-4 essay-heading">
-          <h2 class="chapter-title" id="museos-titulo" data-assemble data-i18n="museumTitle">What museums can show</h2>
-        </div>
-        <div class="col-md-8">
-          <div class="reading-column">
+    <section class="essay-section" id="museos" data-scene="cochabamba" aria-labelledby="museos-titulo">
+      <div class="chapter-opening">
+        <div class="opening-center"><h2 class="chapter-title" id="museos-titulo" data-assemble data-i18n="museumTitle">What museums can show</h2></div>
+      </div>
+<div class="reading-column">
             <article class="research-entry"><p class="entry-meta" data-i18n="expoLabel">Online exhibition · BASA Museum · 2026</p>
             <h3 data-assemble data-i18n="expoTitle">Landscapes in Transformation. The Cochabamba Valley Beyond the Inkas</h3>
             <p class="prose" data-i18n="expoCopy">I created the online exhibition in ArcGIS StoryMaps and translated all exhibition texts into German and English. The exhibition brings together objects from the Bonn Collection of the Americas, colonial sources, and local memories to show how different societies have shaped the Cochabamba Valley.</p>
@@ -113,16 +706,12 @@
             <div class="note-links"><a class="entry-link" href="https://www.sammlungen.uni-bonn.de/aktuelles/auf-spurensuche"><span data-i18n="p26Link">View the P26 exhibition at the University of Bonn</span> <span aria-hidden="true">↗</span></a></div></li></ul>
             </details>
           </div>
-        </div>
-      </div>
     </section>
-    <section class="essay-section" id="publicaciones" aria-labelledby="publicaciones-titulo">
-      <div class="row essay-row">
-        <div class="col-md-4 essay-heading">
-          <h2 class="chapter-title" id="publicaciones-titulo" data-assemble data-i18n="pubTitle">Further reading</h2>
-        </div>
-        <div class="col-md-8">
-          <div class="reading-column">
+    <section class="essay-section" id="publicaciones" data-scene="bonn" aria-labelledby="publicaciones-titulo">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="publicaciones-titulo" data-assemble data-i18n="pubTitle">Further reading</h2></div>
+      </div>
+<div class="reading-column">
             <ul class="archive-list"><li class="archive-entry"><p class="entry-meta" data-i18n="interviewLabel">2025 · Co-authored interview</p>
             <h3 data-assemble data-i18n="interviewTitle">Making the Ancestors Speak</h3>
             <p class="prose" data-i18n="interviewCopy">A conversation with Kerstin Nowack about Udo Oberem, Catherine Julien, and the use of sources in Andean ethnohistory.</p>
@@ -136,16 +725,12 @@
             <p class="prose" data-i18n="audioCopy">A review of the digitization of phonograph cylinder recordings from Tierra del Fuego.</p>
             <div class="note-links"><a class="entry-link" href="https://doi.org/10.48565/bonndoc-469"><span data-i18n="audioLink">Read on bonndoc</span> <span aria-hidden="true">↗</span></a></div></li></ul>
           </div>
-        </div>
-      </div>
     </section>
-    <section class="essay-section" id="formacion" aria-labelledby="formacion-titulo">
-      <div class="row essay-row">
-        <div class="col-md-4 essay-heading">
-          <h2 class="chapter-title" id="formacion-titulo" data-assemble data-i18n="educationTitle">About Joaquín</h2>
-        </div>
-        <div class="col-md-8">
-          <div class="reading-column">
+    <section class="essay-section" id="formacion" data-scene="closing" aria-labelledby="formacion-titulo">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="formacion-titulo" data-assemble data-i18n="educationTitle">About Joaquín</h2></div>
+      </div>
+<div class="reading-column">
             <p class="prose" data-i18n="bio">I am a doctoral candidate in Anthropology of the Americas at the University of Bonn. At the University of Chile, I earned a bachelor’s degree in Hispanic Language and Literature and a master’s degree in Art, specializing in Art Theory and History.</p><details class="extra-reading" id="prensa">
               <summary><span data-assemble data-i18n="pressTitle">Press and interviews</span><span class="disclosure-mark" aria-hidden="true"></span></summary>
               <ul class="archive-list"><li class="archive-entry"><p class="entry-meta" data-i18n="pressBonn">University of Bonn · <time datetime="2026-11-03">November 2026</time></p>
@@ -162,23 +747,17 @@
             <div class="note-links"><a class="entry-link" href="https://youtu.be/ppkGabiR0FI"><span data-i18n="videoLink">Watch the interview on YouTube</span> <span aria-hidden="true">↗</span></a></div></li></ul>
             </details>
           </div>
-        </div>
-      </div>
     </section>
-    <section class="essay-section" id="contacto" aria-labelledby="contacto-titulo">
-      <div class="row essay-row">
-        <div class="col-md-4 essay-heading">
-          <h2 class="chapter-title" id="contacto-titulo" data-assemble data-i18n="contactTitle">Contact</h2>
-        </div>
-        <div class="col-md-8">
-          <div class="reading-column">
+    <section class="essay-section" id="contacto" data-scene="closing" aria-labelledby="contacto-titulo">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="contacto-titulo" data-assemble data-i18n="contactTitle">Contact</h2></div>
+      </div>
+<div class="reading-column">
             <p class="prose" data-i18n="contactCopy">Department of Anthropology of the Americas, University of Bonn. I serve on the editorial team of <i lang="es">Notas de Antropología de las Américas</i>.</p>
           <div class="note-links"><a href="https://orcid.org/0000-0001-9130-447X"><span data-i18n="orcidLink">ORCID profile</span> <span aria-hidden="true">↗</span></a>
           
           <a href="https://www.naa.uni-bonn.de/"><span data-i18n="journalLink">Journal <i lang="es">Notas de Antropología de las Américas</i></span> <span aria-hidden="true">↗</span></a></div>
           </div>
-        </div>
-      </div>
     </section>
     <footer class="site-footer">
       <p>Joaquín Molina</p>
@@ -339,5 +918,300 @@
     "videoTitle": "Interview mit Josué Sánchez"
   }
 }</script>
+  <script>
+const locales = {
+  en: { tag: 'en-US', title: 'Anthropology of the Americas', sections: 'Sections', languages: 'Language' },
+  es: { tag: 'es', title: 'Antropología de las Américas', sections: 'Secciones', languages: 'Idioma' },
+  de: { tag: 'de', title: 'Anthropologie der Amerikas', sections: 'Abschnitte', languages: 'Sprache' }
+};
+const requestedLanguage = new URLSearchParams(location.search).get('lang');
+const language = Object.hasOwn(locales, requestedLanguage) ? requestedLanguage : 'en';
+const locale = locales[language];
+const translations = JSON.parse(document.querySelector('#translations').textContent);
+
+document.documentElement.lang = locale.tag;
+document.title = 'Joaquín Molina — ' + locale.title;
+if (language !== 'en') {
+  const copy = translations[language];
+  for (const image of document.querySelectorAll('[data-alt]')) {
+    image.alt = copy[image.dataset.alt];
+  }
+  for (const node of document.querySelectorAll('[data-i18n]')) {
+    // Only use the translations embedded in this page.
+    node.innerHTML = copy[node.dataset.i18n];
+  }
+  document.querySelector('meta[name="description"]').content =
+    'Joaquín Molina — ' + locale.title + '. ' + copy.heroDeck;
+}
+for (const nav of document.querySelectorAll('[data-label]')) {
+  nav.setAttribute('aria-label', locale[nav.dataset.label]);
+}
+const languageLinks = document.querySelectorAll('.language-nav a');
+for (const link of languageLinks) {
+  link.dataset.destination = link.getAttribute('href');
+  if (link.hreflang === locale.tag) link.setAttribute('aria-current', 'page');
+  else link.removeAttribute('aria-current');
+}
+const followSection = () => {
+  for (const link of languageLinks) {
+    link.setAttribute('href', link.dataset.destination + location.hash);
+  }
+};
+followSection();
+window.addEventListener('hashchange', followSection);
+
+const reduction = window.matchMedia('(prefers-reduced-motion: reduce)');
+const headingTargets = [...document.querySelectorAll('[data-assemble]')];
+const originalHeadings = headingTargets.map(heading => heading.textContent);
+const atlasScenes = {
+  cover: { x: 915.4, y: 440, width: 3170, progress: .09, place: 'valparaiso', world: true },
+  ocean: { x: 665, y: 355, width: 1530, progress: .33, place: 'ocean' },
+  cochas: { x: 340, y: 530, width: 850, progress: .49, place: 'cochas' },
+  washington: { x: 370, y: 230, width: 1050, progress: .65, place: 'washington' },
+  crossing: { x: 705, y: 345, width: 1640, progress: .83, place: 'ocean' },
+  cochabamba: { x: 425, y: 560, width: 870, progress: .92, place: 'cochabamba' },
+  bonn: { x: 915, y: 100, width: 950, progress: 1, place: 'bonn' },
+  closing: { x: 915.4, y: 440, width: 3170, progress: 1, place: 'ocean', world: true }
+};
+const atlasOcean = { en: 'Atlantic Ocean', es: 'Océano Atlántico', de: 'Atlantischer Ozean' };
+const clamp = value => Math.max(0, Math.min(1, value));
+const interpolate = (from, to, position) => from + (to - from) * position;
+const ease = value => value * value * (3 - 2 * value);
+
+function createAtlas(stage) {
+  const svg = stage.querySelector('.atlas-vector');
+  const routes = [...svg.querySelectorAll('.atlas-route')];
+  const places = [...svg.querySelectorAll('.atlas-place')];
+  const placeArrival = { valparaiso: .05, cochas: .29, washington: .61, cochabamba: .89, bonn: .85 };
+  let view = '';
+
+  return {
+    render(camera, activePlace) {
+      const { width, height } = stage.getBoundingClientRect();
+      if (width < 1 || height < 1) return;
+      const ratio = width / height;
+      // On a phone, retain enough vertical geography to orient a close-up.
+      const globalWidth = Math.max(3170, 1620 * ratio);
+      const localWidth = ratio < .75 ? camera.width * (.72 + .28 * ratio) : camera.width;
+      const cameraWidth = interpolate(localWidth, globalWidth, camera.world || 0);
+      const cameraHeight = cameraWidth / ratio;
+      const nextView = [
+        camera.x - cameraWidth / 2,
+        camera.y - cameraHeight / 2,
+        cameraWidth,
+        cameraHeight
+      ].map(value => value.toFixed(2)).join(' ');
+      if (nextView !== view) {
+        svg.setAttribute('viewBox', nextView);
+        view = nextView;
+      }
+      const scale = cameraWidth / width;
+      svg.style.setProperty('--land-ink', clamp(camera.progress).toFixed(3));
+      for (const route of routes) {
+        const from = Number(route.dataset.from);
+        const to = Number(route.dataset.to);
+        route.style.setProperty('--route-offset', (1 - clamp((camera.progress - from) / (to - from))).toFixed(3));
+      }
+      for (const place of places) {
+        const point = place.querySelector('.atlas-marker');
+        point.setAttribute('transform', 'scale(' + scale.toFixed(3) + ')');
+        const current = place.dataset.place === activePlace;
+        const arrival = clamp((camera.progress - placeArrival[place.dataset.place]) * 5 + .42);
+        place.style.setProperty('--place-opacity', current ? 1 : (.20 + .59 * arrival).toFixed(2));
+        place.classList.toggle('is-current', current);
+      }
+    }
+  };
+}
+
+const landSource = 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json';
+const landMirror = 'https://unpkg.com/world-atlas@2.0.2/land-110m.json';
+
+function landPath(topology) {
+  if (topology?.type !== 'Topology' || !topology.objects?.land) {
+    throw new TypeError('Invalid World Atlas land data');
+  }
+  const transform = topology.transform;
+  const arcs = topology.arcs.map(arc => {
+    let x = 0;
+    let y = 0;
+    return arc.map(point => {
+      if (transform) {
+        x += point[0];
+        y += point[1];
+        point = [
+          x * transform.scale[0] + transform.translate[0],
+          y * transform.scale[1] + transform.translate[1]
+        ];
+      }
+      const horizontal = 600 + (point[0] + 38) * 8.3;
+      const vertical = 440 - point[1] * 8.3;
+      return horizontal.toFixed(1) + ' ' + vertical.toFixed(1);
+    });
+  });
+
+  function ring(indexes) {
+    const coordinates = indexes.flatMap((index, i) => {
+      const arc = index < 0 ? [...arcs[~index]].reverse() : arcs[index];
+      return i ? arc.slice(1) : arc;
+    });
+    return coordinates.length ? 'M' + coordinates.join('L') + 'Z' : '';
+  }
+
+  function geometry(shape) {
+    if (shape.type === 'GeometryCollection') return shape.geometries.map(geometry).join('');
+    if (shape.type === 'Polygon') return shape.arcs.map(ring).join('');
+    if (shape.type === 'MultiPolygon') return shape.arcs.map(polygon => polygon.map(ring).join('')).join('');
+    return '';
+  }
+
+  const outline = geometry(topology.objects.land);
+  if (!outline) throw new TypeError('World Atlas land data has no polygons');
+  return outline;
+}
+
+async function readLand(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('World Atlas HTTP ' + response.status);
+  return response.json();
+}
+
+async function loadCoastlines(scope) {
+  try {
+    const data = await readLand(landSource).catch(() => readLand(landMirror));
+    const outline = landPath(data);
+    for (const path of scope.querySelectorAll('.atlas-land')) path.setAttribute('d', outline);
+  } catch {
+    // The route, places and graticule remain available without the coastlines.
+  }
+}
+
+function assemble(heading, text) {
+  const spoken = document.createElement('span');
+  spoken.className = 'visually-hidden';
+  spoken.textContent = text;
+  const visible = document.createElement('span');
+  visible.setAttribute('aria-hidden', 'true');
+  const characters = Array.from(text).filter(character => !/\s/u.test(character)).length;
+  let index = 0;
+  for (const segment of text.split(/(\s+)/u)) {
+    if (!segment) continue;
+    if (/^\s+$/u.test(segment)) {
+      visible.append(document.createTextNode(segment));
+      continue;
+    }
+    const word = document.createElement('span');
+    word.className = 'letter-word';
+    for (const character of segment) {
+      const letter = document.createElement('span');
+      letter.className = 'letter';
+      letter.textContent = character;
+      letter.style.setProperty('--delay', .46 * index / Math.max(1, characters - 1));
+      letter.style.setProperty('--drift', index % 2 ? '.035em' : '-.035em');
+      word.append(letter);
+      index += 1;
+    }
+    visible.append(word);
+  }
+  heading.replaceChildren(spoken, visible);
+  heading.classList.add('assembled');
+}
+
+const stage = document.querySelector('.atlas-stage');
+const atlas = createAtlas(stage);
+const scenes = [...document.querySelectorAll('[data-scene]')];
+const originalTitles = headingTargets.map(heading => heading.textContent);
+const chapterOpenings = headingTargets.map(heading => heading.closest('.chapter-opening'));
+const oceanName = atlasOcean[language];
+let frame = 0;
+let sceneOffsets = [];
+let scrollMax = 0;
+let needsMeasure = true;
+stage.querySelector('[data-atlas-ocean]').textContent = oceanName;
+
+function currentCamera(scroll, viewport) {
+  const target = scroll + viewport * .43;
+  let nextIndex = sceneOffsets.findIndex(scene => scene.top > target);
+  if (nextIndex === -1) nextIndex = sceneOffsets.length;
+  if (nextIndex === 0) return { camera: sceneOffsets[0].camera, place: sceneOffsets[0].camera.place };
+  const from = sceneOffsets[nextIndex - 1];
+  if (nextIndex === sceneOffsets.length) return { camera: from.camera, place: from.camera.place };
+  const to = sceneOffsets[nextIndex];
+  const distance = to.top - from.top;
+  const transition = Math.min(distance, viewport * .86);
+  const amount = ease(clamp((target - (to.top - transition)) / Math.max(1, transition)));
+  return {
+    camera: {
+      x: interpolate(from.camera.x, to.camera.x, amount),
+      y: interpolate(from.camera.y, to.camera.y, amount),
+      width: interpolate(from.camera.width, to.camera.width, amount),
+      progress: interpolate(from.camera.progress, to.camera.progress, amount),
+      world: interpolate(Number(Boolean(from.camera.world)), Number(Boolean(to.camera.world)), amount)
+    },
+    place: amount < .54 ? from.camera.place : to.camera.place
+  };
+}
+
+function render() {
+  frame = 0;
+  const viewport = window.innerHeight;
+  const scroll = window.scrollY;
+  if (needsMeasure) {
+    sceneOffsets = scenes.map(node => ({
+      top: node.getBoundingClientRect().top + scroll,
+      camera: atlasScenes[node.dataset.scene]
+    }));
+    scrollMax = document.documentElement.scrollHeight - viewport;
+    needsMeasure = false;
+  }
+
+  const reveal = reduction.matches ? [] : headingTargets.map((heading, i) => {
+    const opening = chapterOpenings[i];
+    if (opening) {
+      const { top, height } = opening.getBoundingClientRect();
+      return clamp((viewport * .64 - top) / Math.max(1, Math.min(viewport * .56, height * .82)));
+    }
+    const { top } = heading.getBoundingClientRect();
+    return clamp((viewport * .94 - top) / (viewport * .39));
+  });
+  const moment = reduction.matches
+    ? { camera: atlasScenes.closing, place: 'ocean' }
+    : currentCamera(scroll, viewport);
+
+  headingTargets.forEach((heading, i) => {
+    if (reveal[i] !== undefined) heading.style.setProperty('--reveal', reveal[i]);
+  });
+  document.documentElement.style.setProperty('--page-progress', scrollMax > 0 ? clamp(scroll / scrollMax) : 0);
+  atlas.render(moment.camera, moment.place);
+}
+
+function requestFrame() {
+  if (!frame) frame = requestAnimationFrame(render);
+}
+function remeasure() {
+  needsMeasure = true;
+  requestFrame();
+}
+function setMotion() {
+  headingTargets.forEach((heading, i) => {
+    if (reduction.matches) {
+      heading.classList.remove('assembled');
+      heading.textContent = originalTitles[i];
+    } else if (!heading.classList.contains('assembled')) {
+      assemble(heading, originalTitles[i]);
+    }
+  });
+  remeasure();
+}
+
+setMotion();
+window.addEventListener('scroll', requestFrame, { passive: true });
+window.addEventListener('resize', remeasure);
+document.addEventListener('toggle', remeasure, true);
+reduction.addEventListener('change', setMotion);
+if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.querySelector('main'));
+loadCoastlines(document);
+
+  </script>
 </body>
 </html>
