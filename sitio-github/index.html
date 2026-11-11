@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Joaquín Molina, researcher in the anthropology of the Americas. Material culture, collections, and Andean ethnography.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Joaquín Molina — Anthropology of the Americas</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+:root {
+  color-scheme: light;
+  --paper: #fff;
+  --ink: #161616;
+  --muted: #595959;
+  --line: #dedede;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, sans-serif;
+  --margin: clamp(1.15rem, 6vw, 6rem);
+  --page: 83rem;
+  --text: 35rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  isolation: isolate;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+body > header, body > main { position: relative; }
+body > header { z-index: 2; }
+body > main { z-index: 1; }
+::selection { background: #e7e7e7; color: var(--ink); }
+p, h1, h2, h3, figure { margin: 0; }
+img { max-inline-size: 100%; height: auto; }
+a { color: inherit; text-underline-offset: .22em; }
+a:focus-visible, summary:focus-visible { outline: 2px solid currentColor; outline-offset: .2em; }
+[id] { scroll-margin-block-start: 1.75rem; }
+#folger { scroll-margin-block-start: min(42vh, 22rem); }
+.visually-hidden {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+  padding: .65rem .9rem;
+  background: var(--paper);
+}
+.skip-link:not(:focus) { clip-path: inset(50%); }
+.container-fluid.site-width {
+  width: min(100%, var(--page));
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: .7rem clamp(.65rem, 2vw, 2rem);
+  padding-block: clamp(.5rem, 1.5vw, 1.15rem);
+}
+.signature {
+  margin-inline-end: auto;
+  font: 400 clamp(1.13rem, 2.4vw, 1.44rem)/1.1 var(--serif);
+  letter-spacing: -.035em;
+  text-decoration: none;
+}
+.site-index { flex-shrink: 0; }
+.site-index summary, .language-nav a, .navigation a, .read-on, .site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
+  min-height: 2.75rem;
+  color: var(--muted);
+  font: 400 .8rem/1.25 var(--sans);
+  text-decoration: none;
+}
+.site-index summary, .extra-reading summary, .route-details summary { cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::marker { content: ""; }
+.site-index summary:hover, .language-nav a:hover, .navigation a:hover, .read-on:hover, .site-footer a:hover { color: var(--ink); }
+.language-nav, .navigation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 clamp(.55rem, 1.3vw, 1.1rem);
+}
+.language-nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
+.navigation {
+  position: absolute;
+  top: 100%;
+  right: var(--margin);
+  left: var(--margin);
+  justify-content: flex-end;
+  gap: 0 1.4rem;
+  padding-block: .3rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+.site-index:not([open]) .navigation { display: none; }
+.disclosure-mark { color: var(--muted); font: 400 .95rem/1 var(--sans); }
+.disclosure-mark::before { content: "+"; }
+details[open] > summary .disclosure-mark::before { content: "−"; }
+
+.cover {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-height: min(49rem, 78vh);
+  min-height: min(49rem, 78svh);
+  padding-block: clamp(3rem, 8vw, 6rem);
+  text-align: center;
+}
+.cover-title {
+  max-width: 100%;
+  font: 400 clamp(2.9rem, 12vw, 9.6rem)/.91 var(--serif);
+  letter-spacing: -.064em;
+}
+.cover-title > span { display: block; }
+.cover-title .last-line { margin-block-start: .06em; font-style: italic; }
+.cover-lead {
+  max-width: 32ch;
+  margin-block-start: clamp(1.25rem, 3vw, 2rem);
+  font: 400 clamp(1.18rem, 2.3vw, 1.55rem)/1.47 var(--serif);
+}
+.read-on { margin-block-start: .85rem; }
+.read-on .direction { font-size: 1.1em; }
+
+.essay-section { padding-block-end: clamp(4.5rem, 10vw, 8.5rem); }
+.chapter-opening {
+  margin-block-end: clamp(1.7rem, 4.2vw, 3.5rem);
+  text-align: center;
+}
+.chapter-opening.is-compact { margin-block-end: clamp(1.25rem, 3vw, 2.1rem); }
+.chapter-title {
+  max-width: 16ch;
+  margin-inline: auto;
+  font: 400 clamp(2.6rem, 7.7vw, 6rem)/.98 var(--serif);
+  letter-spacing: -.052em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.is-compact .chapter-title { font-size: clamp(2rem, 5.8vw, 3.85rem); }
+.reading-column, .map-layout { width: min(100%, var(--text)); margin-inline: auto; }
+.map-layout { text-align: center; }
+.map-intro .prose { max-width: 38ch; margin-inline: auto; }
+.prose {
+  font: 400 clamp(1.07rem, 1.6vw, 1.28rem)/1.63 var(--serif);
+  overflow-wrap: break-word;
+}
+.entry-meta {
+  margin-block-end: .25rem;
+  color: var(--muted);
+  font: 400 .78rem/1.5 var(--sans);
+}
+.research-entry + .research-entry { margin-block-start: clamp(2rem, 4vw, 3rem); }
+.research-entry h3, .archive-entry h3 {
+  font: 400 clamp(1.36rem, 2.6vw, 1.88rem)/1.18 var(--serif);
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+.research-entry h3 + p, .archive-entry h3 + p { margin-block-start: .5rem; }
+.note-links, .route-index {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .1rem 1.15rem;
+  margin-block-start: .45rem;
+}
+.note-links a, .route-index a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .28em;
+  padding-block: .37rem;
+  color: var(--muted);
+  font: 400 .84rem/1.45 var(--sans);
+  text-decoration-color: var(--line);
+}
+.note-links a:hover, .route-index a:hover { color: var(--ink); text-decoration-color: currentColor; }
+.route-details { margin-block-start: .55rem; }
+.route-details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 2.75rem;
+  color: var(--muted);
+  font-size: .83rem;
+}
+.route-index { justify-content: center; padding: 0; list-style: none; }
+.route-details:not([open]) .route-index { display: none; }
+
+.gallery figure { width: min(100%, 42rem); margin-inline: auto; }
+.gallery img { display: block; inline-size: 100%; filter: grayscale(1); }
+.gallery figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .12rem .65rem;
+  margin-block-start: .7rem;
+  color: var(--muted);
+  font: 400 .8rem/1.5 var(--sans);
+}
+.gallery figcaption strong { font-weight: 500; color: var(--ink); }
+.archive-list { margin: 0; padding: 0; list-style: none; }
+.archive-entry + .archive-entry { margin-block-start: 1.75rem; }
+.archive-entry .prose { font-size: clamp(1rem, 1.45vw, 1.12rem); }
+.publications h3 a { text-decoration: none; }
+.publications h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.publications .outbound { margin-inline-start: .18em; color: var(--muted); font: 400 .65em/1 var(--sans); }
+.extra-reading { margin-block-start: 1.5rem; border-top: 1px solid var(--line); }
+.extra-reading summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 2.75rem;
+  padding-block: .65rem;
+  color: var(--muted);
+  font: 400 .86rem/1.35 var(--sans);
+}
+.extra-reading summary:hover { color: var(--ink); }
+.extra-reading .archive-list { padding-block: .5rem; }
+.site-footer { padding-block: .6rem 1.25rem; text-align: center; }
+@media (max-width: 365px) {
+  .masthead { gap: .55rem; }
+  .language-nav { gap: 0 .4rem; }
+  .language-nav a, .site-index summary { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .letter-word, .letter { display: inline-block; }
+  .letter-word { max-width: 100%; }
+  .assembled .letter {
+    --inked: clamp(0, calc((var(--reveal, 1) - var(--delay)) * 2.1), 1);
+    opacity: calc(.66 + .34 * var(--inked));
+    transform: translateY(calc(.09em * (1 - var(--inked))));
+  }
+}
+.atlas-stage {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #f9f9f9;
+}
+.atlas-vector { display: block; width: 100%; height: 100%; }
+.atlas-grid {
+  fill: none;
+  stroke: #b1b1b1;
+  stroke-width: .65;
+  stroke-opacity: .42;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-land {
+  fill: #e0e0e0;
+  fill-opacity: calc(.23 + .29 * var(--land-ink, 0));
+  stroke: #757575;
+  stroke-opacity: .37;
+  stroke-width: .95;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-trace {
+  fill: none;
+  stroke: #6a6a6a;
+  stroke-opacity: .57;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--land-ink, 0));
+}
+.atlas-route {
+  fill: none;
+  stroke: #5c5c5c;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--route-offset, .88);
+  opacity: .78;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-route.is-branch { stroke-width: 1.15; opacity: .57; }
+.atlas-place { opacity: var(--place-opacity, .76); }
+.atlas-dot, .atlas-ring {
+  fill: #fdfdfd;
+  stroke: #616161;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-ring { fill: none; stroke-opacity: .38; }
+.atlas-place.is-current .atlas-dot { fill: #616161; }
+.atlas-label {
+  fill: #4d4d4d;
+  stroke: #f8f8f8;
+  stroke-width: 3px;
+  paint-order: stroke;
+  stroke-linejoin: round;
+  font: 500 11px var(--sans);
+}
+.atlas-ocean {
+  fill: #6e6e6e;
+  fill-opacity: .6;
+  letter-spacing: 5px;
+  font: italic 14px var(--serif);
+  text-anchor: middle;
+}
+.atlas-frame { fill: none; stroke: #9d9d9d; stroke-opacity: .38; stroke-width: .75; vector-effect: non-scaling-stroke; }
+.atlas-stage { background: #fff; }
+.atlas-vector { opacity: var(--atlas-contrast, 1); }
+.atlas-grid { fill: none; stroke: #000; stroke-width: .5; stroke-opacity: .15; }
+.atlas-frame { fill: none; stroke: #000; stroke-width: .65; stroke-opacity: .27; }
+.atlas-land { fill: none; stroke: #000; stroke-width: .73; stroke-opacity: .47; }
+.atlas-trace { fill: none; stroke: #000; stroke-width: .7; stroke-opacity: .82; }
+.atlas-route { stroke: #000; stroke-width: 1.15; opacity: .86; }
+.atlas-route.is-branch { stroke-width: .8; opacity: .64; }
+.atlas-dot, .atlas-ring { stroke: #000; stroke-width: .7; }
+.atlas-dot { fill: #fff; }
+.atlas-ring { fill: none; stroke-opacity: .4; }
+.atlas-place.is-current .atlas-dot { fill: #000; }
+.atlas-label { fill: #000; stroke: #fff; stroke-width: 2px; }
+.atlas-ocean { fill: #000; fill-opacity: .37; }</style>
+</head>
+<body id="inicio" data-edition="atlas-fluido">
+  <div class="atlas-stage" aria-hidden="true">
+  <svg class="atlas-vector" viewBox="-669.6 -370 3170 1620" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <g class="atlas-camera">
+      <rect class="atlas-frame" x="-578.6" y="-224" width="2988" height="1328"/>
+      <path class="atlas-grid" d="M-578.6 -265.5 L-578.6 1145.5 M-495.6 -265.5 L-495.6 1145.5 M-412.6 -265.5 L-412.6 1145.5 M-329.6 -265.5 L-329.6 1145.5 M-246.6 -265.5 L-246.6 1145.5 M-163.6 -265.5 L-163.6 1145.5 M-80.6 -265.5 L-80.6 1145.5 M2.4 -265.5 L2.4 1145.5 M85.4 -265.5 L85.4 1145.5 M168.4 -265.5 L168.4 1145.5 M251.4 -265.5 L251.4 1145.5 M334.4 -265.5 L334.4 1145.5 M417.4 -265.5 L417.4 1145.5 M500.4 -265.5 L500.4 1145.5 M583.4 -265.5 L583.4 1145.5 M666.4 -265.5 L666.4 1145.5 M749.4 -265.5 L749.4 1145.5 M832.4 -265.5 L832.4 1145.5 M915.4 -265.5 L915.4 1145.5 M998.4 -265.5 L998.4 1145.5 M1081.4 -265.5 L1081.4 1145.5 M1164.4 -265.5 L1164.4 1145.5 M1247.4 -265.5 L1247.4 1145.5 M1330.4 -265.5 L1330.4 1145.5 M1413.4 -265.5 L1413.4 1145.5 M1496.4 -265.5 L1496.4 1145.5 M1579.4 -265.5 L1579.4 1145.5 M1662.4 -265.5 L1662.4 1145.5 M1745.4 -265.5 L1745.4 1145.5 M1828.4 -265.5 L1828.4 1145.5 M1911.4 -265.5 L1911.4 1145.5 M1994.4 -265.5 L1994.4 1145.5 M2077.4 -265.5 L2077.4 1145.5 M2160.4 -265.5 L2160.4 1145.5 M2243.4 -265.5 L2243.4 1145.5 M2326.4 -265.5 L2326.4 1145.5 M2409.4 -265.5 L2409.4 1145.5 M-578.6 1104.0 L2409.4 1104.0 M-578.6 1021.0 L2409.4 1021.0 M-578.6 938.0 L2409.4 938.0 M-578.6 855.0 L2409.4 855.0 M-578.6 772.0 L2409.4 772.0 M-578.6 689.0 L2409.4 689.0 M-578.6 606.0 L2409.4 606.0 M-578.6 523.0 L2409.4 523.0 M-578.6 440.0 L2409.4 440.0 M-578.6 357.0 L2409.4 357.0 M-578.6 274.0 L2409.4 274.0 M-578.6 191.0 L2409.4 191.0 M-578.6 108.0 L2409.4 108.0 M-578.6 25.0 L2409.4 25.0 M-578.6 -58.0 L2409.4 -58.0 M-578.6 -141.0 L2409.4 -141.0 M-578.6 -224.0 L2409.4 -224.0"/>
+      <path class="atlas-land"/>
+      <path class="atlas-land atlas-trace" pathLength="1"/>
+      <g class="atlas-lines">
+        <path class="atlas-route" d="M321.0 714.3 C301.2 689.0 268.0 581.1 291.2 539.8" pathLength="1" data-from="0.02" data-to="0.35" style="--route-offset:0.727"/>
+  <path class="atlas-route" d="M291.2 539.8 C201.6 390.2 185.0 215.9 276.0 117.0" pathLength="1" data-from="0.35" data-to="0.66" style="--route-offset:1.000"/>
+  <path class="atlas-route" d="M276.0 117.0 C492.1 -41.4 749.4 -66.3 974.3 18.9" pathLength="1" data-from="0.64" data-to="0.89" style="--route-offset:1.000"/>
+  <path class="atlas-route is-branch" d="M291.2 539.8 C317.8 531.3 367.6 539.6 366.3 584.3" pathLength="1" data-from="0.83" data-to="0.98" style="--route-offset:1.000"/>
+  <path class="atlas-route is-branch" d="M366.3 584.3 C624.9 489.8 790.9 141.2 974.3 18.9" pathLength="1" data-from="0.88" data-to="1" style="--route-offset:1.000"/>
+      </g>
+      <text class="atlas-ocean" x="639" y="325" data-atlas-ocean="true">Atlantic Ocean</text>
+      <g class="atlas-place" data-place="valparaiso" transform="translate(321.0 714.3)">
+        <g class="atlas-marker">
+          <circle class="atlas-ring" r="6.4"/>
+          <circle class="atlas-dot" r="2.5"/>
+          <text class="atlas-label" x="8" y="16" text-anchor="start">Valparaíso</text>
+        </g>
+      </g>
+      <g class="atlas-place" data-place="cochas" transform="translate(291.2 539.8)">
+        <g class="atlas-marker">
+          <circle class="atlas-ring" r="6.4"/>
+          <circle class="atlas-dot" r="2.5"/>
+          <text class="atlas-label" x="-8" y="-8" text-anchor="end">Cochas Chico</text>
+        </g>
+      </g>
+      <g class="atlas-place" data-place="cochabamba" transform="translate(366.3 584.3)">
+        <g class="atlas-marker">
+          <circle class="atlas-ring" r="6.4"/>
+          <circle class="atlas-dot" r="2.5"/>
+          <text class="atlas-label" x="9" y="15" text-anchor="start">Cochabamba</text>
+        </g>
+      </g>
+      <g class="atlas-place" data-place="washington" transform="translate(276.0 117.0)">
+        <g class="atlas-marker">
+          <circle class="atlas-ring" r="6.4"/>
+          <circle class="atlas-dot" r="2.5"/>
+          <text class="atlas-label" x="-8" y="-9" text-anchor="end">Washington, D.C.</text>
+        </g>
+      </g>
+      <g class="atlas-place" data-place="bonn" transform="translate(974.3 18.9)">
+        <g class="atlas-marker">
+          <circle class="atlas-ring" r="6.4"/>
+          <circle class="atlas-dot" r="2.5"/>
+          <text class="atlas-label" x="8" y="-9" text-anchor="start">Bonn</text>
+        </g>
+      </g>
+    
+    </g>
+  </svg>
+  </div>
+  <a class="skip-link" href="#principal" data-i18n="skip">Skip to content</a>
+  <header class="container-fluid site-width">
+    <div class="masthead">
+      <a href="#inicio" class="signature">Joaquín Molina</a>
+      <details class="site-index">
+        <summary><span data-i18n="siteIndex">Index</span><span class="disclosure-mark" aria-hidden="true"></span></summary>
+        <nav class="navigation" aria-label="Sections" data-label="sections">
+          <a href="#composicion" data-i18n="navRoute">Map</a>
+          <a href="#investigacion" data-i18n="navResearch">Research</a>
+          <a href="#publicaciones" data-i18n="navPubs">Publications</a>
+          <a href="#galeria" data-i18n="navGallery">Gallery</a>
+        </nav>
+      </details>
+      <nav class="language-nav" aria-label="Language" data-label="languages">
+        <a href="?lang=en" hreflang="en-US" lang="en-US" aria-label="English" aria-current="page">EN</a>
+        <a href="?lang=es" hreflang="es" lang="es" aria-label="Español">ES</a>
+        <a href="?lang=de" hreflang="de" lang="de" aria-label="Deutsch">DE</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container-fluid site-width" id="principal">
+    <section class="cover" data-scene="cover" aria-labelledby="nombre">
+      <h1 class="cover-title" id="nombre"><span data-assemble data-i18n="coverLineOne">The lives</span> <span class="last-line" data-assemble data-i18n="coverLineTwo">of things</span></h1>
+      <p class="cover-lead" data-i18n="heroDeck">I study how objects, rituals, and collections shape memory in the Americas.</p>
+      <a href="#composicion" class="read-on"><span data-i18n="startReading">Follow the route</span><span class="direction" aria-hidden="true">↓</span></a>
+    </section>
+    <section class="essay-section" id="composicion" data-scene="ocean" aria-labelledby="ejes">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="ejes" data-assemble data-i18n="mapTitle">Across the Atlantic</h2></div>
+      </div>
+      <div class="map-layout">
+        <div class="map-intro">
+          
+          <p class="prose" data-i18n="mapCopy">From Valparaíso to Bonn, I follow the paths objects take through the Americas and across the Atlantic.</p>
+        </div>
+        <details class="route-details">
+          <summary><span data-i18n="routeStops">Places on the route</span><span class="disclosure-mark" aria-hidden="true"></span></summary>
+          <ol class="route-index">
+            <li><a href="#formacion">Valparaíso<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#investigacion">Cochas Chico<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#folger">Washington, D.C.<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#museos">Cochabamba<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#publicaciones">Bonn<span aria-hidden="true">↗</span></a></li>
+          </ol>
+        </details>
+      </div>
+    </section>
+    <section class="essay-section" id="investigacion" data-scene="cochas" aria-labelledby="investigacion-titulo">
+      <div class="chapter-opening">
+        <div class="opening-center"><h2 class="chapter-title" id="investigacion-titulo" data-assemble data-i18n="storyTitle">What a gourd can tell</h2></div>
+      </div>
+<div class="reading-column">
+            <article class="research-entry"><p class="entry-meta" data-i18n="andesLabel">Material culture · Provenance</p>
+            <h3 data-i18n="andesTitle">Between the Andes and the Alps</h3>
+            <p class="prose" data-i18n="andesCopy">I trace the journey of a gourd carved by Guillermo Ventura. Johanna Schupp bought it in Cochas Chico in 1983, brought it to Borken in 1987, and donated it to the BASA Museum in 2021. Cataloged as <strong>Schu18</strong>, the gourd depicts a child’s illness, diagnosis, and recovery in 31 scenes set in the Mantaro Valley.</p>
+            <div class="note-links" data-scene="washington"><a class="entry-link" href="https://www.mkb.ch/en/veranstaltungen/unknown-creators-from-the-americas.html"><span data-i18n="baselLink">Basel talk</span> <span aria-hidden="true">↗</span></a>
+            
+            <a class="entry-link" id="folger" href="https://www.folger.edu/whats-on/folger-salon-october-2026/"><span data-i18n="folgerLink">Folger Salon</span> <span aria-hidden="true">↗</span></a></div></article>
+<article class="research-entry"><p class="entry-meta" data-i18n="mantaroLabel">Ethnography · Peru</p>
+            <h3 data-i18n="mantaroTitle">Mantaro Valley</h3>
+            <p class="prose" data-i18n="mantaroCopy">My doctoral research examines Wanka identity through two practices in Peru’s Mantaro Valley: gourd carving in Cochas Chico and the pagapu offering ritual at Huaytapallana.</p></article>
+          </div>
+    </section>
+    <section class="essay-section" id="galeria" data-scene="crossing" aria-labelledby="galeria-titulo">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="galeria-titulo" data-assemble data-i18n="galleryTitle">Looking closely</h2></div>
+      </div>
+      
+      <div class="gallery">
+          <figure>
+            <div class="gallery-frame">
+              <img width="1400" height="1050" loading="lazy" decoding="async" data-alt="mateAlt" alt="A hand points to a calendar carved into the surface of a gourd" src="fotos/mate-burilado.webp">
+            </div>
+            <figcaption><strong data-i18n="mateTitle">A carved calendar</strong><span data-i18n="mateCaption">Detail of a carved gourd showing the months of the year.</span></figcaption>
+          </figure>
+      </div>
+    </section>
+    <section class="essay-section" id="museos" data-scene="cochabamba" aria-labelledby="museos-titulo">
+      <div class="chapter-opening">
+        <div class="opening-center"><h2 class="chapter-title" id="museos-titulo" data-assemble data-i18n="museumTitle">What museums can show</h2></div>
+      </div>
+<div class="reading-column">
+            <article class="research-entry"><p class="entry-meta" data-i18n="expoLabel">Online exhibition · BASA Museum · 2026</p>
+            <h3 data-i18n="expoTitle">Landscapes in Transformation. The Cochabamba Valley Beyond the Inkas</h3>
+            <p class="prose" data-i18n="expoCopy">I created the online exhibition in ArcGIS StoryMaps and translated all exhibition texts into German and English. The exhibition brings together objects from the Bonn Collection of the Americas, colonial sources, and local memories to show how different societies have shaped the Cochabamba Valley.</p>
+            <div class="note-links"><a class="entry-link" href="https://arcg.is/00rn1f3"><span data-i18n="storyLink">Virtual tour</span> <span aria-hidden="true">↗</span></a>
+            
+            <a class="entry-link" href="https://expocbba.github.io/landscapes/"><span data-i18n="githubLink">Exhibition site</span> <span aria-hidden="true">↗</span></a>
+            
+            <a class="entry-link" href="https://amerigrafias.hypotheses.org/category/museo-basa/symposio-paisajes"><span data-i18n="sympLink">Symposium</span> <span aria-hidden="true">↗</span></a>
+            
+            <a class="entry-link" href="https://www.uni-bonn.de/de/neues/zeugen-der-landschaft"><span data-i18n="expoNews">University of Bonn</span> <span aria-hidden="true">↗</span></a></div></article><details class="extra-reading">
+              <summary><span data-i18n="moreExhibitions">More exhibitions</span><span class="disclosure-mark" aria-hidden="true"></span></summary>
+              <ul class="archive-list"><li class="archive-entry"><p class="entry-meta" data-i18n="basaLabel">Exhibition · BASA Museum · 2025–2026</p>
+            <h3 lang="de">Mehr als nur Buchstaben</h3>
+            <p class="prose" data-i18n="basaCopy">The exhibition brought together objects that convey stories and knowledge through images and signs across the Americas. For the catalog, I wrote the entry on Guillermo Ventura’s carved gourd and a text on the Wanka.</p>
+            <div class="note-links"><a class="entry-link" href="https://www.iak.uni-bonn.de/de/museen/basa-museum-bonner-amerikas-sammlung/ausstellungen-1/fruehere-ausstellungen"><span data-i18n="basaLink">View the exhibition in the BASA Museum archive</span> <span aria-hidden="true">↗</span></a></div></li><li class="archive-entry"><p class="entry-meta" data-i18n="p26Label">Exhibition · P26 · 2024–2025</p>
+            <h3 lang="de">Auf Spurensuche</h3>
+            <p class="prose" data-i18n="p26Copy">I contributed to the BASA Museum’s presentation in this University of Bonn exhibition on the provenance of objects. Guillermo Ventura’s carved gourd Schu18 was among the objects on display.</p>
+            <div class="note-links"><a class="entry-link" href="https://www.sammlungen.uni-bonn.de/aktuelles/auf-spurensuche"><span data-i18n="p26Link">View the P26 exhibition at the University of Bonn</span> <span aria-hidden="true">↗</span></a></div></li></ul>
+            </details>
+          </div>
+    </section>
+    <section class="essay-section" id="publicaciones" data-scene="bonn" aria-labelledby="publicaciones-titulo">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="publicaciones-titulo" data-assemble data-i18n="pubTitle">Further reading</h2></div>
+      </div>
+<div class="reading-column">
+            <ul class="archive-list publications"><li class="archive-entry"><p class="entry-meta" data-i18n="interviewLabel">2025 · Co-authored interview</p>
+            <h3><a href="https://doi.org/10.71903/naa.v4i.3313"><span data-i18n="interviewTitle">Making the Ancestors Speak</span> <span class="outbound" aria-hidden="true">↗</span></a></h3>
+            <p class="prose" data-i18n="interviewCopy">A conversation with Kerstin Nowack about Udo Oberem, Catherine Julien, and the use of sources in Andean ethnohistory.</p></li>
+<li class="archive-entry"><p class="entry-meta" data-i18n="articleLabel">2025 · Co-authored article</p>
+            <h3><a href="https://doi.org/10.3828/bhs.2024.76"><span data-i18n="articleTitle">Illness, Diagnosis, Treatment, and Cure: Carving Sorcery in the Mantaro Valley</span> <span class="outbound" aria-hidden="true">↗</span></a></h3>
+            <p class="prose" data-i18n="articleCopy">The article traces the provenance of Schu18 and examines how its carved scenes depict <i>chacho</i> illness and <i>jubeo de cuy</i>, a diagnostic practice involving a guinea pig.</p></li>
+<li class="archive-entry"><p class="entry-meta" data-i18n="audioLabel">2024 · Audio review</p>
+            <h3><a href="https://doi.org/10.48565/bonndoc-469"><span data-i18n="audioTitle">The “Koppers Feuerland” Wax Cylinders</span> <span class="outbound" aria-hidden="true">↗</span></a></h3>
+            <p class="prose" data-i18n="audioCopy">A review of the digitization of phonograph cylinder recordings from Tierra del Fuego.</p></li></ul>
+          </div>
+    </section>
+    <section class="essay-section" id="formacion" data-scene="closing" aria-labelledby="formacion-titulo">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="formacion-titulo" data-assemble data-i18n="educationTitle">About Joaquín</h2></div>
+      </div>
+<div class="reading-column">
+            <p class="prose" data-i18n="bio">I am a doctoral candidate in Anthropology of the Americas at the University of Bonn. At the University of Chile, I earned a bachelor’s degree in Hispanic Language and Literature and a master’s degree in Art, specializing in Art Theory and History.</p><details class="extra-reading" id="prensa">
+              <summary><span data-i18n="pressTitle">Press and interviews</span><span class="disclosure-mark" aria-hidden="true"></span></summary>
+              <ul class="archive-list"><li class="archive-entry"><p class="entry-meta" data-i18n="pressBonn">University of Bonn · <time datetime="2026-11-03">November 2026</time></p>
+            <h3 data-i18n="pressBonnTitle">Witnesses to the Landscape. Exhibition on the Cochabamba Valley at the Bonn Americas Collection—on view until March 2027</h3>
+            <div class="note-links"><a class="entry-link" href="https://www.iak.uni-bonn.de/de/institut/abteilungen/altamerikanistik/ankuendigungen/zeugen-der-landschaft"><span data-i18n="pressBonnLink">Read the University of Bonn article (in German)</span> <span aria-hidden="true">↗</span></a></div></li>
+<li class="archive-entry"><p class="entry-meta" data-i18n="pressBorken">Borkener Zeitung · <time datetime="2025-06-13">June 2025</time></p>
+            <h3 data-i18n="pressBorkenTitle">Ethnologist from Borken donates parts of her collection to the University of Bonn</h3>
+            <p class="prose" data-i18n="pressBorkenCopy">Peter Berger follows the journey of a carved gourd from a market in Cochas Chico to the BASA Museum. The article describes how a 3D model helped researchers study its 31 engraved scenes.</p>
+            <div class="note-links"><a class="entry-link" href="https://www.borkenerzeitung.de/nachrichten/borken/Borkener-Ethnologin-ueberlaesst-Teile-ihrer-Sammlung-der-Uni-Bonn-641453.html"><span data-i18n="pressBorkenLink">Read the Borkener Zeitung article (in German)</span> <span aria-hidden="true">↗</span></a>
+            
+            <a class="entry-link" id="borken-download" href="documentos/bor1406johannaschupp.pdf" download="bor1406johannaschupp.pdf"><span data-i18n="borkenPdf">Download the print article (PDF)</span> <span aria-hidden="true">↓</span></a></div></li>
+<li class="archive-entry"><p class="entry-meta" data-i18n="videoLabel">Video · Interview</p>
+            <h3 data-i18n="videoTitle">Interview with Josué Sánchez</h3>
+            <div class="note-links"><a class="entry-link" href="https://youtu.be/ppkGabiR0FI"><span data-i18n="videoLink">Watch the interview on YouTube</span> <span aria-hidden="true">↗</span></a></div></li></ul>
+            </details>
+          </div>
+    </section>
+    <section class="essay-section" id="contacto" data-scene="closing" aria-labelledby="contacto-titulo">
+      <div class="chapter-opening is-compact">
+        <div class="opening-center"><h2 class="chapter-title" id="contacto-titulo" data-assemble data-i18n="contactTitle">Contact</h2></div>
+      </div>
+<div class="reading-column">
+            <p class="prose" data-i18n="contactCopy">Department of Anthropology of the Americas, University of Bonn. I serve on the editorial team of <i lang="es">Notas de Antropología de las Américas</i>.</p>
+          <div class="note-links"><a href="https://orcid.org/0000-0001-9130-447X"><span data-i18n="orcidLink">ORCID profile</span> <span aria-hidden="true">↗</span></a>
+          
+          <a href="https://www.naa.uni-bonn.de/"><span data-i18n="journalLink">Journal <i lang="es">Notas de Antropología de las Américas</i></span> <span aria-hidden="true">↗</span></a></div>
+          </div>
+    </section>
+    <footer class="site-footer">
+      <a href="#inicio"><span data-i18n="top">Back to top</span><span aria-hidden="true">↑</span></a>
+    </footer>
+  </main>
+  <script id="translations" type="application/json">{
+  "es": {
+    "andesCopy": "Sigo el recorrido de un mate burilado de Guillermo Ventura. Johanna Schupp lo compró en Cochas Chico en 1983, lo llevó a Borken en 1987 y lo donó al Museo BASA en 2021. Catalogado como <strong>Schu18</strong>, el mate narra en 31 viñetas la enfermedad, el diagnóstico y la curación de un niño en el valle del Mantaro.",
+    "andesLabel": "Cultura material · Proveniencia",
+    "andesTitle": "De los Andes a los Alpes",
+    "articleCopy": "El artículo reconstruye la proveniencia del mate Schu18 y analiza la representación del <i>chacho</i> y del <i>jubeo de cuy</i> en sus escenas grabadas.",
+    "articleLabel": "2025 · Artículo en coautoría",
+    "articleTitle": "Enfermedad, diagnóstico, tratamiento y cura: burilando hechicería en el valle del Mantaro",
+    "audioCopy": "Reseña sobre la digitalización de las grabaciones en cilindros fonográficos de Tierra del Fuego.",
+    "audioLabel": "2024 · Reseña de audio",
+    "audioTitle": "Los cilindros de cera «Koppers Feuerland»",
+    "basaCopy": "La muestra reunió objetos que transmiten historias y conocimientos mediante imágenes y signos en las Américas. Para el catálogo escribí la ficha del mate burilado de Guillermo Ventura y un texto sobre los wanka.",
+    "basaLabel": "Exposición · Museo BASA · 2025–2026",
+    "basaLink": "Ver la exposición en el archivo del Museo BASA",
+    "baselLink": "Charla en Basilea",
+    "bio": "Soy doctorando en Antropología de las Américas en la Universidad de Bonn. En la Universidad de Chile cursé el pregrado en Lengua y Literatura Hispánica y el Magíster en Artes con mención en Teoría e Historia del Arte.",
+    "borkenPdf": "Descargar la edición impresa (PDF)",
+    "contactCopy": "Departamento de Antropología de las Américas, Universidad de Bonn. Integro el equipo editorial de <i>Notas de Antropología de las Américas</i>.",
+    "contactTitle": "Contacto",
+    "coverLineOne": "La vida",
+    "coverLineTwo": "de las cosas",
+    "educationTitle": "Sobre mí",
+    "expoCopy": "Creé la versión virtual de la muestra en ArcGIS StoryMaps y traduje íntegramente los textos expositivos al alemán y al inglés. La exposición reúne objetos de la Colección de las Américas de Bonn, fuentes coloniales y memorias locales para mostrar cómo distintas sociedades han transformado el valle de Cochabamba.",
+    "expoLabel": "Exposición virtual · Museo BASA · 2026",
+    "expoNews": "Universidad de Bonn",
+    "expoTitle": "Paisajes en transformación. El valle de Cochabamba más allá de los inkas",
+    "folgerLink": "Folger Salon",
+    "galleryTitle": "Mirar de cerca",
+    "githubLink": "Sitio de la exposición",
+    "heroDeck": "Investigo cómo los objetos, los rituales y las colecciones dan forma a la memoria en las Américas.",
+    "interviewCopy": "Conversación con Kerstin Nowack sobre Udo Oberem, Catherine Julien y el trabajo con fuentes en la etnohistoria andina.",
+    "interviewLabel": "2025 · Entrevista en coautoría",
+    "interviewTitle": "Hacer hablar a los antepasados",
+    "journalLink": "Revista <i>Notas de Antropología de las Américas</i>",
+    "mantaroCopy": "Mi investigación doctoral examina la identidad wanka a partir de dos prácticas en el valle del Mantaro: el burilado de mates en Cochas Chico y el pagapu al Huaytapallana.",
+    "mantaroLabel": "Etnografía · Perú",
+    "mantaroTitle": "Valle del Mantaro",
+    "mapCopy": "De Valparaíso a Bonn, sigo los caminos que toman los objetos por las Américas y a través del Atlántico.",
+    "mapTitle": "A través del Atlántico",
+    "mateAlt": "Una mano señala un calendario burilado en una calabaza",
+    "mateCaption": "Detalle de un mate burilado con los meses del año.",
+    "mateTitle": "Un calendario burilado",
+    "moreExhibitions": "Otras exposiciones",
+    "museumTitle": "Lo que muestra un museo",
+    "navGallery": "Galería",
+    "navPubs": "Publicaciones",
+    "navResearch": "Investigación",
+    "navRoute": "Mapa",
+    "orcidLink": "Perfil ORCID",
+    "p26Copy": "Colaboré en la presentación del Museo BASA para esta exposición de la Universidad de Bonn sobre la procedencia de los objetos. Entre las piezas expuestas estaba el mate burilado Schu18, de Guillermo Ventura.",
+    "p26Label": "Exposición · P26 · 2024–2025",
+    "p26Link": "Ver la exposición del P26 en la Universidad de Bonn",
+    "pressBonn": "Universidad de Bonn · <time datetime=\"2026-11-03\">Noviembre de 2026</time>",
+    "pressBonnLink": "Leer la nota de la Universidad de Bonn (en alemán)",
+    "pressBonnTitle": "Testigos del paisaje. Exposición sobre el valle de Cochabamba en la Colección de las Américas de Bonn, hasta marzo de 2027",
+    "pressBorken": "Borkener Zeitung · <time datetime=\"2025-06-13\">Junio de 2025</time>",
+    "pressBorkenCopy": "Peter Berger sigue el recorrido de un mate burilado desde un mercado de Cochas Chico hasta el Museo BASA. El artículo cuenta cómo un modelo 3D facilitó el estudio de sus 31 escenas grabadas.",
+    "pressBorkenLink": "Leer la nota del Borkener Zeitung (en alemán)",
+    "pressBorkenTitle": "Una etnóloga de Borken dona parte de su colección a la Universidad de Bonn",
+    "pressTitle": "Prensa y entrevistas",
+    "pubTitle": "Para seguir leyendo",
+    "skip": "Saltar al contenido",
+    "startReading": "Seguir el recorrido",
+    "storyLink": "Recorrido virtual",
+    "storyTitle": "Lo que cuenta un mate",
+    "sympLink": "Simposio",
+    "top": "Volver arriba",
+    "videoLabel": "Video · Entrevista",
+    "videoLink": "Ver la entrevista en YouTube",
+    "videoTitle": "Entrevista a Josué Sánchez",
+    "siteIndex": "Índice",
+    "routeStops": "Lugares del recorrido"
+  },
+  "de": {
+    "andesCopy": "Ich zeichne den Weg einer von Guillermo Ventura geschnitzten Kalebasse nach. Johanna Schupp kaufte sie 1983 in Cochas Chico, brachte sie 1987 nach Borken und schenkte sie 2021 dem BASA-Museum. Die als <strong>Schu18</strong> inventarisierte Kalebasse erzählt in 31 Szenen von der Erkrankung, Diagnose und Heilung eines Kindes im Mantaro-Tal.",
+    "andesLabel": "Materielle Kultur · Provenienz",
+    "andesTitle": "Zwischen den Anden und den Alpen",
+    "articleCopy": "Der Artikel rekonstruiert die Provenienz der Kalebasse Schu18. Er untersucht, wie die eingeritzten Szenen die Krankheit <i>chacho</i> und das <i>jubeo de cuy</i>, eine Diagnosepraxis mit einem Meerschweinchen, darstellen.",
+    "articleLabel": "2025 · Artikel in Koautorschaft",
+    "articleTitle": "Krankheit, Diagnose, Behandlung und Heilung: Zauberei als Schnitzmotiv im Mantaro-Tal",
+    "audioCopy": "Rezension zur Digitalisierung von Phonographenaufnahmen aus Feuerland.",
+    "audioLabel": "2024 · Audiorezension",
+    "audioTitle": "Die Wachswalzen „Koppers Feuerland“",
+    "basaCopy": "Die Ausstellung versammelte Objekte, die in den Amerikas Geschichten und Wissen durch Bilder und Zeichen vermitteln. Für den Katalog schrieb ich den Eintrag zu Guillermo Venturas geschnitzter Kalebasse und einen Beitrag über die Wanka.",
+    "basaLabel": "Ausstellung · BASA-Museum · 2025–2026",
+    "basaLink": "Ausstellung im Archiv des BASA-Museums ansehen",
+    "baselLink": "Vortrag in Basel",
+    "bio": "Ich promoviere in Altamerikanistik an der Universität Bonn. An der Universidad de Chile erwarb ich einen Bachelorabschluss in spanischer Sprache und Literatur sowie einen Masterabschluss in Kunst mit Schwerpunkt Kunsttheorie und Kunstgeschichte.",
+    "borkenPdf": "Zeitungsartikel herunterladen (PDF)",
+    "contactCopy": "Abteilung für Altamerikanistik, Universität Bonn. Ich bin Mitglied der Redaktion von <i lang=\"es\">Notas de Antropología de las Américas</i>.",
+    "contactTitle": "Kontakt",
+    "coverLineOne": "Das Leben",
+    "coverLineTwo": "der Dinge",
+    "educationTitle": "Über mich",
+    "expoCopy": "Ich erstellte die Online-Ausstellung in ArcGIS StoryMaps und übersetzte sämtliche Ausstellungstexte ins Deutsche und Englische. Die Ausstellung verbindet Objekte der Bonner Amerikas-Sammlung mit kolonialzeitlichen Quellen und lokalen Erinnerungen. Sie zeigt, wie verschiedene Gesellschaften das Cochabamba-Tal geprägt haben.",
+    "expoLabel": "Online-Ausstellung · BASA-Museum · 2026",
+    "expoNews": "Universität Bonn",
+    "expoTitle": "Landschaften im Wandel. Das Cochabamba-Tal jenseits der Inka",
+    "folgerLink": "Folger Salon",
+    "galleryTitle": "Genau hinsehen",
+    "githubLink": "Ausstellungswebsite",
+    "heroDeck": "Ich erforsche, wie Objekte, Rituale und Sammlungen das Gedächtnis in den Amerikas prägen.",
+    "interviewCopy": "Gespräch mit Kerstin Nowack über Udo Oberem, Catherine Julien und die Arbeit mit Quellen in der andinen Ethnohistorie.",
+    "interviewLabel": "2025 · Interview in Koautorschaft",
+    "interviewTitle": "Die Vorfahren zum Sprechen bringen",
+    "journalLink": "Zeitschrift <i lang=\"es\">Notas de Antropología de las Américas</i>",
+    "mantaroCopy": "In meiner Dissertation untersuche ich die Wanka-Identität anhand zweier Praktiken im peruanischen Mantaro-Tal: der Herstellung geschnitzter Kalebassen in Cochas Chico und des Pagapu-Opferrituals am Huaytapallana.",
+    "mantaroLabel": "Ethnografie · Peru",
+    "mantaroTitle": "Mantaro-Tal",
+    "mapCopy": "Von Valparaíso bis Bonn folge ich den Wegen, die Objekte durch die Amerikas und über den Atlantik nehmen.",
+    "mapTitle": "Über den Atlantik",
+    "mateAlt": "Eine Hand zeigt auf einen in eine Kalebasse geschnitzten Kalender",
+    "mateCaption": "Detail einer geschnitzten Kalebasse mit den Monaten des Jahres.",
+    "mateTitle": "Ein geschnitzter Kalender",
+    "moreExhibitions": "Weitere Ausstellungen",
+    "museumTitle": "Was Museen zeigen können",
+    "navGallery": "Galerie",
+    "navPubs": "Publikationen",
+    "navResearch": "Forschung",
+    "navRoute": "Karte",
+    "orcidLink": "ORCID-Profil",
+    "p26Copy": "Ich wirkte am Beitrag des BASA-Museums zu dieser Ausstellung der Universität Bonn über die Provenienz von Sammlungsobjekten mit. Zu den Exponaten gehörte die von Guillermo Ventura geschnitzte Kalebasse Schu18.",
+    "p26Label": "Ausstellung · P26 · 2024–2025",
+    "p26Link": "Die P26-Ausstellung auf der Website der Universität Bonn ansehen",
+    "pressBonn": "Universität Bonn · <time datetime=\"2026-11-03\">November 2026</time>",
+    "pressBonnLink": "Artikel der Universität Bonn lesen",
+    "pressBonnTitle": "Zeugen der Landschaft. Ausstellung über das Cochabamba-Tal in der Bonner Amerikas-Sammlung bis März 2027",
+    "pressBorken": "Borkener Zeitung · <time datetime=\"2025-06-13\">Juni 2025</time>",
+    "pressBorkenCopy": "Peter Berger verfolgt den Weg einer geschnitzten Kalebasse von einem Markt in Cochas Chico bis ins BASA-Museum. Der Artikel zeigt, wie ein 3D-Modell die Untersuchung ihrer 31 eingeritzten Szenen erleichterte.",
+    "pressBorkenLink": "Artikel der Borkener Zeitung lesen",
+    "pressBorkenTitle": "Borkener Ethnologin überlässt Teile ihrer Sammlung der Uni Bonn",
+    "pressTitle": "Presse und Interviews",
+    "pubTitle": "Zum Weiterlesen",
+    "skip": "Zum Inhalt springen",
+    "startReading": "Der Route folgen",
+    "storyLink": "Virtueller Rundgang",
+    "storyTitle": "Was eine Kalebasse erzählt",
+    "sympLink": "Symposium",
+    "top": "Nach oben",
+    "videoLabel": "Video · Interview",
+    "videoLink": "Interview auf YouTube ansehen",
+    "videoTitle": "Interview mit Josué Sánchez",
+    "siteIndex": "Inhalt",
+    "routeStops": "Orte der Route"
+  }
+}</script>
+  <script>
+const locales = {
+  en: { tag: 'en-US', title: 'Anthropology of the Americas', sections: 'Sections', languages: 'Language' },
+  es: { tag: 'es', title: 'Antropología de las Américas', sections: 'Secciones', languages: 'Idioma' },
+  de: { tag: 'de', title: 'Anthropologie der Amerikas', sections: 'Abschnitte', languages: 'Sprache' }
+};
+const requestedLanguage = new URLSearchParams(location.search).get('lang');
+const language = Object.prototype.hasOwnProperty.call(locales, requestedLanguage) ? requestedLanguage : 'en';
+const locale = locales[language];
+const translations = JSON.parse(document.querySelector('#translations').textContent);
+
+document.documentElement.lang = locale.tag;
+document.title = 'Joaquín Molina — ' + locale.title;
+if (language !== 'en') {
+  const copy = translations[language];
+  for (const image of document.querySelectorAll('[data-alt]')) {
+    image.alt = copy[image.dataset.alt];
+  }
+  for (const node of document.querySelectorAll('[data-i18n]')) {
+    // Only use the translations embedded in this page.
+    node.innerHTML = copy[node.dataset.i18n];
+  }
+  document.querySelector('meta[name="description"]').content =
+    'Joaquín Molina — ' + locale.title + '. ' + copy.heroDeck;
+}
+for (const nav of document.querySelectorAll('[data-label]')) {
+  nav.setAttribute('aria-label', locale[nav.dataset.label]);
+}
+const languageLinks = document.querySelectorAll('.language-nav a');
+for (const link of languageLinks) {
+  link.dataset.destination = link.getAttribute('href');
+  if (link.hreflang === locale.tag) link.setAttribute('aria-current', 'page');
+  else link.removeAttribute('aria-current');
+}
+const followSection = () => {
+  for (const link of languageLinks) {
+    link.setAttribute('href', link.dataset.destination + location.hash);
+  }
+};
+followSection();
+window.addEventListener('hashchange', followSection);
+
+const reduction = window.matchMedia('(prefers-reduced-motion: reduce)');
+const headingTargets = [...document.querySelectorAll('[data-assemble]')];
+const atlasScenes = {
+  cover: { x: 915.4, y: 440, width: 3170, progress: .09, place: 'valparaiso', world: true },
+  ocean: { x: 665, y: 355, width: 1530, progress: .33, place: 'ocean' },
+  cochas: { x: 340, y: 530, width: 850, progress: .49, place: 'cochas' },
+  washington: { x: 370, y: 230, width: 1050, progress: .65, place: 'washington' },
+  crossing: { x: 705, y: 345, width: 1640, progress: .83, place: 'ocean' },
+  cochabamba: { x: 425, y: 560, width: 870, progress: .92, place: 'cochabamba' },
+  bonn: { x: 915, y: 100, width: 950, progress: 1, place: 'bonn' },
+  closing: { x: 915.4, y: 440, width: 3170, progress: 1, place: 'ocean', world: true }
+};
+const atlasOcean = { en: 'Atlantic Ocean', es: 'Océano Atlántico', de: 'Atlantischer Ozean' };
+const clamp = value => Math.max(0, Math.min(1, value));
+const interpolate = (from, to, position) => from + (to - from) * position;
+const ease = value => value * value * (3 - 2 * value);
+
+function createAtlas(stage) {
+  const svg = stage.querySelector('.atlas-vector');
+  const plane = svg.querySelector('.atlas-camera');
+  const routes = [...svg.querySelectorAll('.atlas-route')];
+  const places = [...svg.querySelectorAll('.atlas-place')];
+  const placeArrival = { valparaiso: .05, cochas: .29, washington: .61, cochabamba: .89, bonn: .85 };
+  let view = '';
+  let previousCamera;
+  let previousPlace;
+
+  return {
+    render(camera, activePlace) {
+      const { width, height } = stage.getBoundingClientRect();
+      if (width < 1 || height < 1) return;
+      const nextView = '0 0 ' + width + ' ' + height;
+      if (nextView === view && camera === previousCamera && activePlace === previousPlace) return;
+      if (nextView !== view) {
+        svg.setAttribute('viewBox', nextView);
+        view = nextView;
+      }
+      previousCamera = camera;
+      previousPlace = activePlace;
+      const ratio = width / height;
+      // On a phone, retain enough vertical geography to orient a close-up.
+      const globalWidth = Math.max(3170, 1620 * ratio);
+      const localWidth = ratio < .75 ? camera.width * (.72 + .28 * ratio) : camera.width;
+      const cameraWidth = interpolate(localWidth, globalWidth, camera.world || 0);
+      const scale = width / cameraWidth;
+      const x = width / 2 - camera.x * scale;
+      const y = height / 2 - camera.y * scale;
+      // Resize the SVG viewport only when its box changes. Pan and zoom the vector group.
+      plane.setAttribute('transform', 'matrix(' + scale + ' 0 0 ' + scale + ' ' + x + ' ' + y + ')');
+      const markerScale = (1 / scale).toFixed(3);
+      svg.style.setProperty('--land-ink', clamp(camera.progress).toFixed(3));
+      for (const route of routes) {
+        const from = Number(route.dataset.from);
+        const to = Number(route.dataset.to);
+        route.style.setProperty('--route-offset', (1 - clamp((camera.progress - from) / (to - from))).toFixed(3));
+      }
+      for (const place of places) {
+        const point = place.querySelector('.atlas-marker');
+        point.setAttribute('transform', 'scale(' + markerScale + ')');
+        const current = place.dataset.place === activePlace;
+        const arrival = clamp((camera.progress - placeArrival[place.dataset.place]) * 5 + .42);
+        place.style.setProperty('--place-opacity', current ? 1 : (.20 + .59 * arrival).toFixed(2));
+        place.classList.toggle('is-current', current);
+      }
+    }
+  };
+}
+
+const landSource = 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json';
+const landMirror = 'https://unpkg.com/world-atlas@2.0.2/land-110m.json';
+
+function landPath(topology) {
+  if (topology?.type !== 'Topology' || !topology.objects?.land) {
+    throw new TypeError('Invalid World Atlas land data');
+  }
+  const transform = topology.transform;
+  const arcs = topology.arcs.map(arc => {
+    let x = 0;
+    let y = 0;
+    return arc.map(point => {
+      if (transform) {
+        x += point[0];
+        y += point[1];
+        point = [
+          x * transform.scale[0] + transform.translate[0],
+          y * transform.scale[1] + transform.translate[1]
+        ];
+      }
+      const horizontal = 600 + (point[0] + 38) * 8.3;
+      const vertical = 440 - point[1] * 8.3;
+      return horizontal.toFixed(1) + ' ' + vertical.toFixed(1);
+    });
+  });
+
+  function ring(indexes) {
+    const coordinates = indexes.flatMap((index, i) => {
+      const arc = index < 0 ? [...arcs[~index]].reverse() : arcs[index];
+      return i ? arc.slice(1) : arc;
+    });
+    return coordinates.length ? 'M' + coordinates.join('L') + 'Z' : '';
+  }
+
+  function geometry(shape) {
+    if (shape.type === 'GeometryCollection') return shape.geometries.map(geometry).join('');
+    if (shape.type === 'Polygon') return shape.arcs.map(ring).join('');
+    if (shape.type === 'MultiPolygon') return shape.arcs.map(polygon => polygon.map(ring).join('')).join('');
+    return '';
+  }
+
+  const outline = geometry(topology.objects.land);
+  if (!outline) throw new TypeError('World Atlas land data has no polygons');
+  return outline;
+}
+
+async function readLand(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('World Atlas HTTP ' + response.status);
+  return response.json();
+}
+
+async function loadCoastlines(scope) {
+  try {
+    const data = await readLand(landSource).catch(() => readLand(landMirror));
+    const outline = landPath(data);
+    for (const path of scope.querySelectorAll('.atlas-land')) path.setAttribute('d', outline);
+  } catch {
+    // The route, places and graticule remain available without the coastlines.
+  }
+}
+
+function assemble(heading, text) {
+  const spoken = document.createElement('span');
+  spoken.className = 'visually-hidden';
+  spoken.textContent = text;
+  const visible = document.createElement('span');
+  visible.setAttribute('aria-hidden', 'true');
+  const characters = Array.from(text).filter(character => !/\s/u.test(character)).length;
+  let index = 0;
+  for (const segment of text.split(/(\s+)/u)) {
+    if (!segment) continue;
+    if (/^\s+$/u.test(segment)) {
+      visible.append(document.createTextNode(segment));
+      continue;
+    }
+    const word = document.createElement('span');
+    word.className = 'letter-word';
+    for (const character of segment) {
+      const letter = document.createElement('span');
+      letter.className = 'letter';
+      letter.textContent = character;
+      letter.style.setProperty('--delay', .46 * index / Math.max(1, characters - 1));
+      word.append(letter);
+      index += 1;
+    }
+    visible.append(word);
+  }
+  heading.textContent = '';
+  heading.append(spoken, visible);
+  heading.classList.add('assembled');
+}
+
+const stage = document.querySelector('.atlas-stage');
+const atlas = createAtlas(stage);
+const scenes = [...document.querySelectorAll('[data-scene]')];
+const originalTitles = headingTargets.map(heading => heading.textContent);
+const chapterOpenings = headingTargets.map(heading => heading.closest('.chapter-opening'));
+const readingAreas = [...document.querySelectorAll('.reading-column, .map-intro')];
+const visualViewport = window.visualViewport;
+const oceanName = atlasOcean[language];
+let frame = 0;
+let sceneOffsets = [];
+let needsMeasure = true;
+stage.querySelector('[data-atlas-ocean]').textContent = oceanName;
+
+function currentCamera(target, viewport) {
+  let nextIndex = sceneOffsets.findIndex(scene => scene.top > target);
+  if (nextIndex === -1) nextIndex = sceneOffsets.length;
+  if (nextIndex === 0) return { camera: sceneOffsets[0].camera, place: sceneOffsets[0].camera.place };
+  const from = sceneOffsets[nextIndex - 1];
+  if (reduction.matches || nextIndex === sceneOffsets.length) {
+    return { camera: from.camera, place: from.camera.place };
+  }
+  const to = sceneOffsets[nextIndex];
+  const distance = to.top - from.top;
+  const transition = Math.min(distance, viewport * .86);
+  const amount = ease(clamp((target - (to.top - transition)) / Math.max(1, transition)));
+  return {
+    camera: {
+      x: interpolate(from.camera.x, to.camera.x, amount),
+      y: interpolate(from.camera.y, to.camera.y, amount),
+      width: interpolate(from.camera.width, to.camera.width, amount),
+      progress: interpolate(from.camera.progress, to.camera.progress, amount),
+      world: interpolate(Number(Boolean(from.camera.world)), Number(Boolean(to.camera.world)), amount)
+    },
+    place: amount < .54 ? from.camera.place : to.camera.place
+  };
+}
+
+function atlasContrast(viewport, visibleTop) {
+  const narrow = window.innerWidth <= 767;
+  if (reduction.matches) return narrow ? .36 : .28;
+  const center = visibleTop + viewport * .5;
+  const distance = Math.min(...readingAreas.map(area => {
+    const { top, bottom } = area.getBoundingClientRect();
+    return Math.max(top - center, center - bottom, 0);
+  }));
+  return interpolate(narrow ? .26 : .16, 1, ease(clamp(distance / (viewport * .28))));
+}
+
+function render() {
+  frame = 0;
+  const viewport = (visualViewport && visualViewport.height) || window.innerHeight;
+  const visibleTop = (visualViewport && visualViewport.offsetTop) || 0;
+  const scroll = window.scrollY ?? window.pageYOffset;
+  if (needsMeasure) {
+    sceneOffsets = scenes.map(node => ({
+      top: node.getBoundingClientRect().top + scroll,
+      camera: atlasScenes[node.dataset.scene]
+    }));
+    needsMeasure = false;
+  }
+
+  const reveal = reduction.matches ? [] : headingTargets.map((heading, i) => {
+    const opening = chapterOpenings[i];
+    if (opening) {
+      const { top, height } = opening.getBoundingClientRect();
+      return clamp((visibleTop + viewport * .64 - top) / Math.max(1, Math.min(viewport * .56, height * .82)));
+    }
+    const { top } = heading.getBoundingClientRect();
+    return clamp((visibleTop + viewport * .94 - top) / (viewport * .39));
+  });
+  const moment = currentCamera(scroll + visibleTop + viewport * .43, viewport);
+
+  headingTargets.forEach((heading, i) => {
+    if (reveal[i] !== undefined) heading.style.setProperty('--reveal', reveal[i]);
+  });
+  stage.style.setProperty('--atlas-contrast', atlasContrast(viewport, visibleTop).toFixed(3));
+  atlas.render(moment.camera, moment.place);
+}
+
+function requestFrame() {
+  if (!frame) frame = requestAnimationFrame(render);
+}
+function remeasure() {
+  needsMeasure = true;
+  requestFrame();
+}
+function setMotion() {
+  headingTargets.forEach((heading, i) => {
+    if (reduction.matches) {
+      heading.classList.remove('assembled');
+      heading.textContent = originalTitles[i];
+    } else if (!heading.classList.contains('assembled')) {
+      assemble(heading, originalTitles[i]);
+    }
+  });
+  remeasure();
+}
+
+setMotion();
+window.addEventListener('scroll', requestFrame, { passive: true });
+window.addEventListener('resize', remeasure);
+window.addEventListener('pageshow', remeasure);
+document.addEventListener('toggle', remeasure, true);
+if (visualViewport) {
+  visualViewport.addEventListener('resize', remeasure);
+  visualViewport.addEventListener('scroll', requestFrame, { passive: true });
+}
+if (reduction.addEventListener) reduction.addEventListener('change', setMotion);
+else reduction.addListener(setMotion);
+if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.querySelector('main'));
+loadCoastlines(document);
+
+  </script>
+</body>
+</html>
